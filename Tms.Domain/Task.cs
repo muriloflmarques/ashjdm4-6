@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tms.Domain
 {
+    [Table("Task")]
     public class Task : BaseEntity
     {
         public Task(string name, string description, DateTime? startDate, DateTime? finishDate)

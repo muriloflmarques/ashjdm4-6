@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Projects\\Tms\\Tms.Domain\\Tms.Domain.csproj": {}
+    "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj": {}
   },
   "projects": {
-    "Z:\\Projects\\Tms\\Tms.Domain\\Tms.Domain.csproj": {
+    "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Projects\\Tms\\Tms.Domain\\Tms.Domain.csproj",
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj",
         "projectName": "Tms.Domain",
-        "projectPath": "Z:\\Projects\\Tms\\Tms.Domain\\Tms.Domain.csproj",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj",
         "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
-        "outputPath": "Z:\\Projects\\Tms\\Tms.Domain\\obj\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",

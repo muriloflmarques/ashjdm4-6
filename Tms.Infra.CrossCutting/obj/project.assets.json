@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Projects\\Tms\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj",
+      "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj",
       "projectName": "Tms.Infra.CrossCutting",
-      "projectPath": "Z:\\Projects\\Tms\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj",
+      "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj",
       "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
-      "outputPath": "Z:\\Projects\\Tms\\Tms.Infra.CrossCutting\\obj\\",
+      "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",

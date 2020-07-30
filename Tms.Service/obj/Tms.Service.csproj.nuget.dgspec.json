@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Projects\\Tms\\Tms.Service\\Tms.Service.csproj": {}
+    "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj": {}
   },
   "projects": {
-    "Z:\\Projects\\Tms\\Tms.Service\\Tms.Service.csproj": {
+    "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Projects\\Tms\\Tms.Service\\Tms.Service.csproj",
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj",
         "projectName": "Tms.Service",
-        "projectPath": "Z:\\Projects\\Tms\\Tms.Service\\Tms.Service.csproj",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj",
         "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
-        "outputPath": "Z:\\Projects\\Tms\\Tms.Service\\obj\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",

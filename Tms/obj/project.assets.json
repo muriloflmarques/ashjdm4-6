@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Projects\\Tms\\Tms\\Tms.csproj",
+      "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms\\Tms.csproj",
       "projectName": "Tms",
-      "projectPath": "Z:\\Projects\\Tms\\Tms\\Tms.csproj",
+      "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms\\Tms.csproj",
       "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
-      "outputPath": "Z:\\Projects\\Tms\\Tms\\obj\\",
+      "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",

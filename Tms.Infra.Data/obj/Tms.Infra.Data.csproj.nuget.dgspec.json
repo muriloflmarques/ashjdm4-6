@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Projects\\Tms\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {}
+    "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {}
   },
   "projects": {
-    "Z:\\Projects\\Tms\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {
+    "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Projects\\Tms\\Tms.Infra.Data\\Tms.Infra.Data.csproj",
-        "projectName": "Tms.Infra.Data",
-        "projectPath": "Z:\\Projects\\Tms\\Tms.Infra.Data\\Tms.Infra.Data.csproj",
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj",
+        "projectName": "Tms.Domain",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj",
         "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
-        "outputPath": "Z:\\Projects\\Tms\\Tms.Infra.Data\\obj\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,6 +37,72 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj",
+        "projectName": "Tms.Infra.Data",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
