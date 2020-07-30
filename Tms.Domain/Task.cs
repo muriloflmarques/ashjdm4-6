@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Tms.Infra.CrossCutting.Enums;
 
 namespace Tms.Domain
 {
     [Table("Task")]
-    public class Task : BaseEntity
+    public partial class Task : BaseEntity
     {
+        protected Task() { }
+
         public Task(string name, string description, DateTime? startDate,
             DateTime? finishDate) : base()
         {
@@ -15,24 +18,19 @@ namespace Tms.Domain
             this.Description = description;
             this.StartDate = startDate;
             this.FinishDate = finishDate;
+
+            this.SubTasks = new HashSet<SubTask>();
         }
 
         public Task(string name, string description)
          : this(name, description, null, null) { }
 
-        private Task _parentTask;
         private string _name;
         private string _description;
         private DateTime? _startDate;
         private DateTime? _finishDate;
         private TaskStateEnum _taskState;
-        private List<Task> _subTasks;
-
-        public Task ParentTask
-        {
-            get { return _parentTask; }
-            private set { _parentTask = value; }
-        }
+        private ICollection<SubTask> _subTasks;
 
         public string Name
         {
@@ -64,10 +62,21 @@ namespace Tms.Domain
             private set { _taskState = value; }
         }
 
-        public List<Task> SubTasks
+        public virtual ICollection<SubTask> SubTasks
         {
             get { return _subTasks; }
             private set { _subTasks = value; }
+        }
+
+        public void AddNewSubTask(SubTask subTask)
+        {
+            if (subTask == null)
+                throw new Exception("Please, informe a SubTask to be added");
+
+            if(!this.SubTasks.Any(st => st == subTask))
+                this.SubTasks.Add(subTask);
+
+            this.SubTasks.Add(subTask);
         }
     }
 }

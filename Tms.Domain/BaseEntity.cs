@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tms.Domain
 {
@@ -17,7 +16,8 @@ namespace Tms.Domain
 
         public void SetDeleteDate() => this.DeleteDate = DateTime.Now;
 
-        public string Id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         public DateTime CreationDate { get; private set; }
         public DateTime? ChangeDate { get; private set; }

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Tms.Infra.CrossCutting.DTOs
 {
-public   class TaskDto
+    public class TaskDto
     {
-        public TaskDto ParentTask { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime? StartDate { get; set; }
@@ -14,5 +12,9 @@ public   class TaskDto
         public int TaskState { get; set; }
         public string TaskStateText { get; set; }
         public TaskDto[] SubTasks { get; set; }
+
+
+        public DateTime CreationDate { get; set; }
+        public DateTime? ChangeDate { get; set; }
     }
 }

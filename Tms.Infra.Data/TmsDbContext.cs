@@ -1,29 +1,34 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Tms.Domain;
 
 namespace Tms.Infra.Data
 {
     public class TmsDbContext : DbContext
     {
-        public TmsDbContext(DbContextOptions dbContextOptions)
+        public TmsDbContext(DbContextOptions<TmsDbContext> dbContextOptions)
             : base(dbContextOptions) { }
 
-        //private readonly string _connectionString;
-
-        //public TmsContext(string connectionString)
-        //{
-        //    this._connectionString = connectionString;
-        //}
-
         public DbSet<Domain.Task> Tasks { get; set; }
+        public DbSet<Domain.SubTask> SubTasks { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(this._connectionString);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Domain.Task>()
+                .HasKey(x => x.Id);
 
-        //    base.OnConfiguring(optionsBuilder);
-        //}
+            modelBuilder.Entity<Domain.Task>()
+                .HasMany(x => x.SubTasks)
+                .WithOne(x => x.ParentTask)
+                .HasForeignKey(x => x.ParentTaskId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Domain.SubTask>()
+                .HasKey(x => new { x.ParentTaskId, x.TaskId });
+
+            modelBuilder.Entity<Domain.Task>()
+                .HasQueryFilter(x => x.DeleteDate == null);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

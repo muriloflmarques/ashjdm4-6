@@ -2,5 +2,7 @@
 {
     public interface ITaskService
     {
+        void Test();
+        void Test2();
     }
 }

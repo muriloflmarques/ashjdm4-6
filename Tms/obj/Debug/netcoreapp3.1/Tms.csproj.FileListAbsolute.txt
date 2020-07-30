@@ -48,8 +48,6 @@ Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.pdb
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.csprojAssemblyReference.cache
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.AssemblyInfoInputs.cache
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.AssemblyInfo.cs
-Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.csproj.CoreCompileInputs.cache
-Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.MvcApplicationPartsAssemblyInfo.cache
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.RazorTargetAssemblyInfo.cache
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.csproj.CopyComplete
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\staticwebassets\Tms.StaticWebAssets.Manifest.cache
@@ -59,3 +57,11 @@ Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.pdb
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.genruntimeconfig.cache
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.Service.dll
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.Service.pdb
+Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.csproj.CoreCompileInputs.cache
+Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.MvcApplicationPartsAssemblyInfo.cs
+Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.MvcApplicationPartsAssemblyInfo.cache

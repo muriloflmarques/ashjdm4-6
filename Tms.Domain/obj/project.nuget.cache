@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "/JZRgR9NWuRi7SsRMUnd/8qvmfk6+tsFUxK6Oei22oE+BoGVyobRbk9qvqkUbnIfirIP2d2Dr9Ca19uYnjJvnw==",
+  "dgSpecHash": "Ac0RBi8VjhHagjAJ/Q8N9wTfYfZ3iQY3LHx+wdiS7m8i7P4TmU/l3GWuPdmCP2AK30+796lb9qPXdJA1puwyMg==",
   "success": true,
   "projectFilePath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Murilo\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\Murilo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.0.1\\automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",
+    "C:\\Users\\Murilo\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Murilo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.0.0\\microsoft.extensions.dependencyinjection.abstractions.3.0.0.nupkg.sha512",
+    "C:\\Users\\Murilo\\.nuget\\packages\\microsoft.extensions.options\\3.0.0\\microsoft.extensions.options.3.0.0.nupkg.sha512",
+    "C:\\Users\\Murilo\\.nuget\\packages\\microsoft.extensions.primitives\\3.0.0\\microsoft.extensions.primitives.3.0.0.nupkg.sha512",
+    "C:\\Users\\Murilo\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

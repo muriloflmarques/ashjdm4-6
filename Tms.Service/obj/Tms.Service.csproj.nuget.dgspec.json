@@ -41,6 +41,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -154,7 +164,19 @@
               "target": "Package",
               "version": "[3.1.6, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.6, )"
             }
@@ -201,6 +223,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj"
+              },
               "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {
                 "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj"
               }

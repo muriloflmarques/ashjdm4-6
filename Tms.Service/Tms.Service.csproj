@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tms.Infra.CrossCutting\Tms.Infra.CrossCutting.csproj" />
     <ProjectReference Include="..\Tms.Infra.Data\Tms.Infra.Data.csproj" />
   </ItemGroup>
 
