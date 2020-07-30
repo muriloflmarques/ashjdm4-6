@@ -4,5 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tms.Infra.CrossCutting\Tms.Infra.CrossCutting.csproj" />
+    <ProjectReference Include="..\Tms.Infra.Data\Tms.Infra.Data.csproj" />
+    <ProjectReference Include="..\Tms.Service\Tms.Service.csproj" />
+  </ItemGroup>
+
 
 </Project>

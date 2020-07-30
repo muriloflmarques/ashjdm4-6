@@ -1,2 +1,17 @@
 *.cache
 *.suo
+*pdb
+/Tms/obj
+/Tms/bin
+
+/Tms.Domain/obj
+/Tms.Domain/bin
+
+/Tms.Infra.CrossCutting/obj
+/Tms.Infra.CrossCutting/bin
+
+/Tms.Infra.Data/obj
+/Tms.Infra.Data/bin
+
+/Tms.Service/obj
+/Tms.Service/bin

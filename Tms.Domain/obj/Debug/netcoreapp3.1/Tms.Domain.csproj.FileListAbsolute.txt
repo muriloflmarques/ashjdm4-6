@@ -1,0 +1,12 @@
+Z:\Projects\ashjdm4-6\Tms.Domain\bin\Debug\netcoreapp3.1\Tms.Domain.deps.json
+Z:\Projects\ashjdm4-6\Tms.Domain\bin\Debug\netcoreapp3.1\Tms.Domain.dll
+Z:\Projects\ashjdm4-6\Tms.Domain\bin\Debug\netcoreapp3.1\Tms.Domain.pdb
+Z:\Projects\ashjdm4-6\Tms.Domain\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.dll
+Z:\Projects\ashjdm4-6\Tms.Domain\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.pdb
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.csprojAssemblyReference.cache
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.AssemblyInfoInputs.cache
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.AssemblyInfo.cs
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.csproj.CoreCompileInputs.cache
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.csproj.CopyComplete
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.dll
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.pdb

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Tms.Infra.CrossCutting/1.0.0": {
+        "runtime": {
+          "Tms.Infra.CrossCutting.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Tms.Infra.CrossCutting/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

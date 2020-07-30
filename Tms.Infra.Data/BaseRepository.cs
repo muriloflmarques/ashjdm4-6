@@ -8,6 +8,8 @@ namespace Tms.Infra.Data
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
+        private readonly TmsDbContext _tmsContext;
+
         public void Delete(T obj)
         {
             throw new NotImplementedException();

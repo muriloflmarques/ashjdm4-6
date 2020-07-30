@@ -1,5 +1,0 @@
-Z:\Projects\ashjdm4-6\Tms.Infra.Data\bin\Debug\netcoreapp3.1\Tms.Infra.Data.deps.json
-Z:\Projects\ashjdm4-6\Tms.Infra.Data\bin\Debug\netcoreapp3.1\Tms.Infra.Data.dll
-Z:\Projects\ashjdm4-6\Tms.Infra.Data\obj\Debug\netcoreapp3.1\Tms.Infra.Data.csprojAssemblyReference.cache
-Z:\Projects\ashjdm4-6\Tms.Infra.Data\obj\Debug\netcoreapp3.1\Tms.Infra.Data.AssemblyInfoInputs.cache
-Z:\Projects\ashjdm4-6\Tms.Infra.Data\obj\Debug\netcoreapp3.1\Tms.Infra.Data.AssemblyInfo.cs
