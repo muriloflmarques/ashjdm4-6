@@ -5,22 +5,25 @@ using System.Text;
 
 namespace Tms.Infra.Data
 {
-    public class TmsContext : DbContext 
+    public class TmsContext : DbContext
     {
-        private readonly string _connectionString;
+        public TmsContext(DbContextOptions dbContextOptions)
+            : base(dbContextOptions) { }
 
-        public TmsContext(string connectionString)
-        {
-            this._connectionString = connectionString;
-        }
+        //private readonly string _connectionString;
+
+        //public TmsContext(string connectionString)
+        //{
+        //    this._connectionString = connectionString;
+        //}
 
         public DbSet<Domain.Task> Tasks { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(this._connectionString);
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(this._connectionString);
 
-            base.OnConfiguring(optionsBuilder);
-        }
+        //    base.OnConfiguring(optionsBuilder);
+        //}
     }
 }

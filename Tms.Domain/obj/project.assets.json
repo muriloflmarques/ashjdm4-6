@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "Tms.Infra.CrossCutting/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Tms.Infra.CrossCutting.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tms.Infra.CrossCutting.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Tms.Infra.CrossCutting/1.0.0": {
+      "type": "project",
+      "path": "../Tms.Infra.CrossCutting/Tms.Infra.CrossCutting.csproj",
+      "msbuildProject": "../Tms.Infra.CrossCutting/Tms.Infra.CrossCutting.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "Tms.Infra.CrossCutting >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Murilo\\.nuget\\packages\\": {}
@@ -32,7 +51,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj": {
+              "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

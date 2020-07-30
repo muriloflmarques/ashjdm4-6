@@ -1256,11 +1256,24 @@
       "Tms.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Tms.Infra.CrossCutting": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Tms.Domain.dll": {}
         },
         "runtime": {
           "bin/placeholder/Tms.Domain.dll": {}
+        }
+      },
+      "Tms.Infra.CrossCutting/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Tms.Infra.CrossCutting.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tms.Infra.CrossCutting.dll": {}
         }
       }
     }
@@ -4937,6 +4950,11 @@
       "type": "project",
       "path": "../Tms.Domain/Tms.Domain.csproj",
       "msbuildProject": "../Tms.Domain/Tms.Domain.csproj"
+    },
+    "Tms.Infra.CrossCutting/1.0.0": {
+      "type": "project",
+      "path": "../Tms.Infra.CrossCutting/Tms.Infra.CrossCutting.csproj",
+      "msbuildProject": "../Tms.Infra.CrossCutting/Tms.Infra.CrossCutting.csproj"
     }
   },
   "projectFileDependencyGroups": {
