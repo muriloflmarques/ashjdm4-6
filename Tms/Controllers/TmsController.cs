@@ -26,33 +26,34 @@ namespace Tms.Controllers
         }
 
         [HttpGet]
+        public ActionResult<IEnumerable<TaskDto>> Get()
+        {
+            var tasks = _taskRepository.SelectTop();
+
+            var dtos = tasks
+                ?.Select(task => { return _taskService.ConvertDomainToDto(task); })
+                .ToList();
+
+            return dtos;
+        }
+
+        [HttpGet("{id}")]
         public ActionResult<TaskDto> Get(int id)
         {
-            var teste = _taskRepository.FindParentTask(4);
-
             var task = _taskRepository.SelectById(id);
             var dto = _taskService.ConvertDomainToDto(task);
 
             return dto;
         }
 
-        [HttpGet("Test2")]
-        public ActionResult<IEnumerable<TaskDto>> Get()
+        // POST api/<TmsController>/NewTask
+        [HttpPost("NewTask")]
+        public ActionResult Post(CreatingTaskDto creatingTaskDto)
         {
-            var tasks = _taskRepository
-                .SelectByQuery(x => x.Name.Contains("Murilo"))
-                ?.Select(t =>
-                {
-                    return _taskService.ConvertDomainToDto(t);
-                });
-
-            return Ok(tasks);
-        }
-
-        // POST api/<TmsController>
-        [HttpPost]
-        public ActionResult Post(TaskDto taskDto)
-        {
+            if (creatingTaskDto.ParentTaskId <= 0)
+                _taskService.CreateNewSubTask(creatingTaskDto);
+            else
+                _taskService.CreateNewTask(creatingTaskDto);
 
             _uow.Commit();
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using Tms.Infra.CrossCutting.Configurations;
 using Tms.Infra.Data;
 using Tms.Infra.Data.Interface;
 using Tms.Service;
@@ -59,6 +60,10 @@ namespace Tms
             services.AddScoped<ITaskRepository, TaskRepository>();
 
             services.AddScoped<ITaskService, TaskService>();
+
+            services.Configure<DefaultQueryConfigurations>(options =>
+                Configuration.GetSection("DefaultQueryConfigurations")
+                .Bind(options, c => c.BindNonPublicProperties = true));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tms.Domain;
 
 namespace Tms.Infra.Data
 {
@@ -31,7 +30,7 @@ namespace Tms.Infra.Data
                 .OnDelete(DeleteBehavior.NoAction);            
 
             modelBuilder.Entity<Domain.SubTask>()
-                .HasKey(x => new { x.ParentTaskId, x.TaskId });
+                .HasKey(x => new { x.ParentTaskId, x.ChildTaskId });
 
             modelBuilder.Entity<Domain.Task>()
                 .HasQueryFilter(x => x.DeleteDate == null);

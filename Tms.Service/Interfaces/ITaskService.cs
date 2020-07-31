@@ -1,13 +1,16 @@
-﻿using Tms.Infra.CrossCutting.DTOs;
+﻿using System.Collections.Generic;
+using Tms.Infra.CrossCutting.DTOs;
 
 namespace Tms.Service.Interfaces
 {
     public interface ITaskService
     {
-        void CreateNewTask(TaskDto taskDto);
-        void CreateNewSubTask(int parentTaskId, TaskDto taskDto);
+        void CreateNewTask(CreatingTaskDto creatingTaskDto);
+        void CreateNewSubTask(CreatingTaskDto creatingTaskDto);
+        void DeleteTask(int id);
+        IEnumerable<Domain.Task> SelectTop();
 
         TaskDto ConvertDomainToDto(Domain.Task task);
-        Domain.Task ConvertDtoToDomain(CreatingTaskDto dto);
+
     }
 }

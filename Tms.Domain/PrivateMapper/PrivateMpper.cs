@@ -23,16 +23,16 @@ namespace Tms.Domain.PrivateMapper
                     TaskState = (int)task.TaskState,
                     TaskStateText = EnumHelper.GetDescription<TaskStateEnum>(task.TaskState),
 
-                    SubTasks = task.SubTasks.Select(st => st.Task.MapToDto())?.ToArray() ?? new TaskDto[0],
+                    SubTasks = task.SubTasks.Select(st => st.ChildTask.MapToDto())?.ToArray() ?? new TaskDto[0],
 
                     CreationDate = task.CreationDate,
                     ChangeDate = task.ChangeDate
                 };
         }
 
-        public static Task MapToDomain(this CreatingTaskDto dto)
+        public static Task MapToDomain(this CreatingTaskDto creatingTaskDto)
         {
-            return new Task(dto.Name, dto.Description);
+            return new Task(creatingTaskDto.Name, creatingTaskDto.Description);
         }
     }
 }

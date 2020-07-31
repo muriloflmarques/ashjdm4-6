@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Tms.Domain;
 using Tms.Domain.PrivateMapper;
+using Tms.Infra.CrossCutting.CustomException;
 using Tms.Infra.CrossCutting.DTOs;
 using Tms.Infra.Data.Interface;
 using Tms.Service.Interfaces;
@@ -8,28 +11,51 @@ using Tms.Service.Interfaces;
 namespace Tms.Service
 {
     public class TaskService : ITaskService
-    {
+    {        
         private readonly ITaskRepository _taskRepository;
 
         public TaskService(ITaskRepository taskRepository)
         {
+            
             this._taskRepository = taskRepository;
         }
 
         public TaskDto ConvertDomainToDto(Task task) => 
             task.MapToDto();
 
-        public Domain.Task ConvertDtoToDomain(CreatingTaskDto dto) =>
-            dto.MapToDto();
-
-        public void CreateNewSubTask(int parentTaskId, TaskDto taskDto)
+        public void CreateNewSubTask(CreatingTaskDto creatingTaskDto)
         {
-            throw new NotImplementedException();
+            var parentTask = _taskRepository.SelectById(creatingTaskDto.ParentTaskId) ??
+                throw new BusinessLogicException("To create a new SubTask a existing Task is needed");
+
+            var childTask = creatingTaskDto.MapToDomain();
+
+            var subTask = new SubTask(parentTask, childTask);
+
+            parentTask.AddNewSubTask(subTask);
+
+            _taskRepository.Insert(parentTask);
         }
 
-        public void CreateNewTask(TaskDto taskDto)
+        public void CreateNewTask(CreatingTaskDto creatingTaskDto)
         {
-            throw new NotImplementedException();
+            var task = creatingTaskDto.MapToDomain();
+
+            _taskRepository.Insert(task);
+        }
+
+        public void DeleteTask(int id)
+        {
+            var task = _taskRepository.SelectById(id) ??
+                throw new BusinessLogicException("Error while deleting Task, Id informed didn't return any result");
+
+            _taskRepository.Delete(task.SubTasks?.Select(sb => sb.ChildTask));
+            _taskRepository.Delete(task);
+        }
+
+        public IEnumerable<Task> SelectTop()
+        {
+            return _taskRepository.SelectTop();
         }
 
         public void Test2()

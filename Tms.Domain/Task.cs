@@ -97,12 +97,15 @@ namespace Tms.Domain
         public void AddNewSubTask(SubTask subTask)
         {
             if (subTask == null)
-                throw new Exception("Please, informe a SubTask to be added");
+                throw new BusinessLogicException("Please, informe a SubTask to be added");
 
             if (!this.SubTasks.Any(st => st == subTask))
                 this.SubTasks.Add(subTask);
 
             this.SubTasks.Add(subTask);
+
+            if (this.TaskState == TaskStateEnum.Completed)
+                this.AlterTaskState(TaskStateEnum.Planned);
         }
 
         public void AlterTaskState(TaskStateEnum destinyState)

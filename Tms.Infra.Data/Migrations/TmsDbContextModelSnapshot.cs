@@ -24,12 +24,12 @@ namespace Tms.Infra.Data.Migrations
                     b.Property<int>("ParentTaskId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TaskId")
+                    b.Property<int>("ChildTaskId")
                         .HasColumnType("int");
 
-                    b.HasKey("ParentTaskId", "TaskId");
+                    b.HasKey("ParentTaskId", "ChildTaskId");
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("ChildTaskId");
 
                     b.ToTable("SubTasks");
                 });
@@ -57,7 +57,8 @@ namespace Tms.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
@@ -72,16 +73,16 @@ namespace Tms.Infra.Data.Migrations
 
             modelBuilder.Entity("Tms.Domain.SubTask", b =>
                 {
+                    b.HasOne("Tms.Domain.Task", "ChildTask")
+                        .WithMany()
+                        .HasForeignKey("ChildTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Tms.Domain.Task", "ParentTask")
                         .WithMany("SubTasks")
                         .HasForeignKey("ParentTaskId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Tms.Domain.Task", "Task")
-                        .WithMany()
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
