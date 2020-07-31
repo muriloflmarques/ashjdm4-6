@@ -42,7 +42,7 @@ namespace Tms.Infra.Data
         public T SelectById(IQueryable<T> dbSet, int id) =>
             dbSet.FirstOrDefault(x => x.Id == id);
 
-        public IEnumerable<T> SelectByQuery(IQueryable<T> dbSet, 
+        public IEnumerable<T> SelectByQuery(IQueryable<T> dbSet,
             Expression<Func<T, bool>> query) =>
             dbSet.Where(query).ToList();
 
@@ -74,8 +74,8 @@ namespace Tms.Infra.Data
 
         public abstract IQueryable<T> GetDbSet();
 
-        public abstract IQueryable<T> GetDbSetWithDefaultInclude();
+        public abstract IQueryable<T> GetDbSetAsNoTracking();
 
-        public TmsDbContext GetDbContext() => _tmsDbContext;
+        public abstract IQueryable<T> AddDefaultIncludeIntoDbSet(IQueryable<T> dbSet);
     }
 }

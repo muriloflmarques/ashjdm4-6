@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tms.Infra.CrossCutting.CustomException;
 using Tms.Infra.CrossCutting.DTOs;
+using Tms.Infra.CrossCutting.Enums;
 using Tms.Infra.Data.Interface;
 using Tms.Service.Interfaces;
 
@@ -108,6 +111,20 @@ namespace Tms.Controllers
         public ActionResult Put(int id, [FromBody] CreatingTaskDto creatingTaskDto)
         {
             _taskService.UpdateNewTask(id, creatingTaskDto);
+
+            _uow.Commit();
+
+            return Ok();
+        }
+
+        // PUT api/<TmsController>/5
+        [HttpPut("{id}/{taskState}")]
+        public ActionResult Put(int id, int taskState)
+        {
+            if (!Enum.IsDefined(typeof(TaskStateEnum), taskState))
+                throw new DomainRulesException($"The informed Task State ({taskState}) is not valid");
+
+            _taskService.ChangeTaskState(id, (TaskStateEnum)taskState);
 
             _uow.Commit();
 

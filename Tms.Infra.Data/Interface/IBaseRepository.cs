@@ -20,7 +20,7 @@ namespace Tms.Infra.Data.Interface
         T SelectFirstByQuery(IQueryable<T> dbSet, Expression<Func<T, bool>> query);
 
         IQueryable<T> GetDbSet();
-        IQueryable<T> GetDbSetWithDefaultInclude();
-        TmsDbContext GetDbContext();
+        IQueryable<T> GetDbSetAsNoTracking();
+        IQueryable<T> AddDefaultIncludeIntoDbSet(IQueryable<T> dbSet);
     }
 }

@@ -1,9 +1,8 @@
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.deps.json
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.dll
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.pdb
-Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.csprojAssemblyReference.cache
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.AssemblyInfoInputs.cache
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.AssemblyInfo.cs
+Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.csproj.CoreCompileInputs.cache
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.dll
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.pdb
-Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.csproj.CoreCompileInputs.cache

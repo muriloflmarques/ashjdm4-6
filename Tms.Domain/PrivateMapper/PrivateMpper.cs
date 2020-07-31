@@ -15,9 +15,8 @@ namespace Tms.Domain.PrivateMapper
                 :
                 new TaskDto()
                 {
-                    ParentTaskId = task.ParentTaskId,
-
                     Id = task.Id,
+                    ParentTaskId = task.ParentTaskId,
                     Name = task.Name,
                     Description = task.Description,
                     StartDate = task.StartDate,

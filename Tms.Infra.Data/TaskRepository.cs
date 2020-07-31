@@ -20,9 +20,8 @@ namespace Tms.Infra.Data
             this._defaultQueryConfigurations = defaultQueryConfigurations.Value;
         }
 
-        public Task FindParentTask(int subTaskId) =>
-            base.SelectFirstByQuery(GetDbSetWithDefaultInclude(),
-                x => x.SubTasks.Any(st => st.ChildTask.Id == subTaskId));
+        public Task SelectById(int id) =>
+            base.SelectById(this.AddDefaultIncludeIntoDbSet(this.GetDbSetAsNoTracking()), id);
 
         public IEnumerable<Task> SelectTop(IQueryable<Domain.Task> dbSet,
             Expression<Func<Domain.Task, bool>> query)
@@ -36,13 +35,13 @@ namespace Tms.Infra.Data
             return tasks.OrderBy(x => x.Id);
         }
 
-        public override IQueryable<Task> GetDbSet() =>
+        public override IQueryable<Domain.Task> GetDbSet() =>
+            _tmsDbContext.Set<Domain.Task>();
+
+        public override IQueryable<Domain.Task> GetDbSetAsNoTracking() =>
             _tmsDbContext.Set<Domain.Task>().AsNoTracking();
 
-        public override IQueryable<Task> GetDbSetWithDefaultInclude() =>
-             GetDbSet().Include(t => t.SubTasks).ThenInclude(sb => sb.ChildTask);
-
-        public Task SelectById(int id) =>
-            base.SelectById(this.GetDbSetWithDefaultInclude(), id);
+        public override IQueryable<Domain.Task> AddDefaultIncludeIntoDbSet(IQueryable<Domain.Task> dbSet) =>
+             dbSet.Include(t => t.SubTasks).ThenInclude(sb => sb.ChildTask);
     }
 }

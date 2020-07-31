@@ -6,10 +6,10 @@ using Tms.Domain;
 using Tms.Domain.PrivateMapper;
 using Tms.Infra.CrossCutting.CustomException;
 using Tms.Infra.CrossCutting.DTOs;
+using Tms.Infra.CrossCutting.Enums;
 using Tms.Infra.Data;
 using Tms.Infra.Data.Interface;
 using Tms.Service.Interfaces;
-//using Microsoft.EntityFrameworkCore.Relational;
 
 namespace Tms.Service
 {
@@ -27,6 +27,9 @@ namespace Tms.Service
         public TaskDto ConvertDomainToDto(Task task) =>
             task.MapToDto();
 
+        private IQueryable<Domain.Task> GetDbSetAsNoTrackingWithDefaultIncludes() =>
+            _taskRepository.AddDefaultIncludeIntoDbSet(_taskRepository.GetDbSetAsNoTracking());
+
         private void CreateSqlCommandToDeleteSubTask(int parentTaskId, int childTaskId)
         {
             const string paramNameParentTaskId = "@ParentTaskId";
@@ -35,7 +38,7 @@ namespace Tms.Service
             var paramParentTaskId = new SqlParameter(paramNameParentTaskId, parentTaskId);
             var paramChildTaskId = new SqlParameter(paramNameChildTaskId, childTaskId);
 
-            var rawSqlString = new RawSqlString($"DELETE SubTasks WHERE ParentTaskId = {paramNameParentTaskId} and ChildTaskId = {paramNameChildTaskId} ");
+            var rawSqlString = $"DELETE SubTasks WHERE ParentTaskId = {paramNameParentTaskId} and ChildTaskId = {paramNameChildTaskId} ";
 
             var rawSQlCommand = new RawSQlCommand(rawSqlString,
                 new object[] { paramParentTaskId, paramChildTaskId });
@@ -46,9 +49,9 @@ namespace Tms.Service
         public void UpdateNewTask(int id, CreatingTaskDto creatingTaskDto)
         {
             var updatedTask = _taskRepository.SelectById(
-                 _taskRepository.GetDbSetWithDefaultInclude(), id)
+                 this.GetDbSetAsNoTrackingWithDefaultIncludes(), id)
                  ??
-                 throw new BusinessLogicException("Error while updating Task, Id informed didn't return any result");
+                 throw new BusinessLogicException("Error while updating Task, informed Id didn't return any result");
 
             updatedTask.UpdateNameAndDescription(creatingTaskDto);
 
@@ -58,7 +61,7 @@ namespace Tms.Service
                 if (updatedTask.ParentTaskId.HasValue)
                 {
                     var currentParentTask = _taskRepository.SelectById(
-                        _taskRepository.GetDbSetWithDefaultInclude(), updatedTask.ParentTaskId.Value)
+                         this.GetDbSetAsNoTrackingWithDefaultIncludes(), updatedTask.ParentTaskId.Value)
                         ??
                         throw new BusinessLogicException("Error while updating Task, the curent parent of the updated Task could not be found");
 
@@ -71,7 +74,7 @@ namespace Tms.Service
                 }
 
                 var newParentTask = _taskRepository.SelectById(
-                   _taskRepository.GetDbSetWithDefaultInclude(), creatingTaskDto.ParentTaskId)
+                    this.GetDbSetAsNoTrackingWithDefaultIncludes(), creatingTaskDto.ParentTaskId)
                    ??
                    throw new BusinessLogicException("Error while updating Task, could not find the new parent Task");
 
@@ -79,6 +82,34 @@ namespace Tms.Service
             }
 
             _taskRepository.Update(updatedTask);
+        }
+
+        public void ChangeTaskState(int id, TaskStateEnum destinyState)
+        {
+            var taskToUpdate = _taskRepository.SelectById(
+                 this.GetDbSetAsNoTrackingWithDefaultIncludes(), id)
+                 ??
+                 throw new BusinessLogicException("Error while changing Task's state, informed Id didn't return any result");
+
+            if (taskToUpdate.ParentTaskId.HasValue)
+            {
+                var dbSet = this.GetDbSetAsNoTrackingWithDefaultIncludes();
+                    //_taskRepository.AddDefaultIncludeIntoDbSet(_taskRepository.GetDbSet());
+
+                var parentTask =
+                    _taskRepository.SelectById(dbSet, taskToUpdate.ParentTaskId.Value)
+                    ??
+                    throw new BusinessLogicException("Error while changing Task's state, parent Task not found");
+
+                parentTask.ChangeSubTaskState(taskToUpdate, destinyState);
+                _taskRepository.Update(parentTask);
+            }
+            else
+            {
+                taskToUpdate.ChangeTaskState(destinyState);
+
+                _taskRepository.Update(taskToUpdate);
+            }
         }
 
         public void CreateNewTask(CreatingTaskDto creatingTaskDto)
@@ -91,7 +122,7 @@ namespace Tms.Service
         public void CreateNewSubTask(CreatingTaskDto creatingTaskDto)
         {
             var parentTask = _taskRepository.SelectById(
-                _taskRepository.GetDbSetWithDefaultInclude(),
+                this.GetDbSetAsNoTrackingWithDefaultIncludes(),
                 creatingTaskDto.ParentTaskId)
                 ??
                 throw new BusinessLogicException("To create a new SubTask a existing Task is needed");
@@ -113,9 +144,9 @@ namespace Tms.Service
         public void DeleteTask(int id)
         {
             var task = _taskRepository.SelectById(
-                _taskRepository.GetDbSetWithDefaultInclude(), id)
+                this.GetDbSetAsNoTrackingWithDefaultIncludes(), id)
                 ??
-                throw new BusinessLogicException("Error while deleting Task, Id informed didn't return any result");
+                throw new BusinessLogicException("Error while deleting Task, informed Id didn't return any result");
 
             _taskRepository.Delete(task.SubTasks?.Select(sb => sb.ChildTask));
             _taskRepository.Delete(task);
@@ -124,14 +155,14 @@ namespace Tms.Service
         public IEnumerable<Domain.Task> SelectTasksWithoutSubtasks()
         {
             return _taskRepository.SelectTop(
-                _taskRepository.GetDbSet(),
+                _taskRepository.GetDbSetAsNoTracking(),
                 task => task.Id > 0);
         }
 
         public IEnumerable<Domain.Task> SelectTasksWithSubtasks()
         {
             return _taskRepository.SelectTop(
-                _taskRepository.GetDbSetWithDefaultInclude(),
+                this.GetDbSetAsNoTrackingWithDefaultIncludes(),
                 task => !task.ParentTaskId.HasValue);
         }
     }

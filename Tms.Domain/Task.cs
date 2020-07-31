@@ -22,7 +22,7 @@ namespace Tms.Domain
             this.Name = name;
             this.Description = description;
 
-            this.AlterTaskState(TaskStateEnum.Planned);
+            this.ChangeTaskState(TaskStateEnum.Planned);
         }
 
         private string _name;
@@ -68,7 +68,7 @@ namespace Tms.Domain
             get { return _startDate; }
             private set
             {
-                if (value.HasValue & this.StartDate > DateTime.Now)
+                if (value.HasValue && this.StartDate > DateTime.Now)
                     throw new DomainRulesException("Start date can not be setted in the future");
 
                 _startDate = value;
@@ -81,8 +81,8 @@ namespace Tms.Domain
             private set
             {
                 if (!this.StartDate.HasValue)
-                    throw new DomainRulesException("You must informe a start date before setting finish date");
-                else if (value.HasValue & this.StartDate > value.Value)
+                    throw new DomainRulesException("You must informe a start date before setting a finish date");
+                else if (value.HasValue && this.StartDate > value.Value)
                     throw new DomainRulesException("Finish date can not be smaller than start date");
 
                 _finishDate = value;
@@ -104,13 +104,13 @@ namespace Tms.Domain
 
             if (this.ParentTaskId.HasValue)
                 throw new BusinessLogicException("A SubTask can not hold any SubTask");
-            
+
             this.SubTasks.Add(subTask);
 
             subTask.ChildTask.AddParentTaskId(this);
 
             if (this.TaskState == TaskStateEnum.Completed)
-                this.AlterTaskState(TaskStateEnum.Planned);
+                this.ChangeTaskState(TaskStateEnum.Planned);
         }
 
         public SubTask RemoveSubTask(Task task)
@@ -126,33 +126,109 @@ namespace Tms.Domain
 
             subTask.ChildTask.RemoveParentTaskId();
 
-            if (this.SubTasks.Any() && 
+            if (this.SubTasks.Any() &&
                 this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
-                this.AlterTaskState(TaskStateEnum.Completed);
+                this.ChangeTaskState(TaskStateEnum.Completed);
 
             return subTask;
         }
 
-        public void AlterTaskState(TaskStateEnum destinyState)
+        public void ChangeTaskState(TaskStateEnum destinyState)
         {
             if (this.TaskState != destinyState)
             {
                 switch (destinyState)
                 {
                     case TaskStateEnum.Planned:
+                        if (this.SubTasks.Any())
+                        {
+                            if (this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
+                                throw new BusinessLogicException(
+                                    $"It's not possible to change a Task's State to {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Planned)} when all of it's SubTasks are {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Completed)}");
+
+                            else if (this.SubTasks.Any(sb => sb.ChildTask.TaskState == TaskStateEnum.InProgress))
+                                throw new BusinessLogicException(
+                                    $"It's not possible to change a Task's State to {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Planned)} if it has at least one SubTask as {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.InProgress)}");
+                        }
+
                         this.StartDate =
                             this.FinishDate = null;
+
                         break;
+
                     case TaskStateEnum.InProgress:
+                        if (this.SubTasks.Any())
+                        {
+                            if (this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
+                                throw new BusinessLogicException(
+                                    $"It's not possible to change a Task's State to {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.InProgress)} when all of it's SubTasks are {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Completed)}");
+                            else if (!this.SubTasks.Any(sb => sb.ChildTask.TaskState == TaskStateEnum.InProgress))
+                            {
+                                string inProgressDescription = EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.InProgress);
+
+                                throw new BusinessLogicException(
+                                    $"It's not possible to change a Task's State to {inProgressDescription} if it doesn't have at least one SubTask as {inProgressDescription}");
+                            }
+                        }
+
                         this.StartDate = DateTime.Now;
-                        break;
-                    case TaskStateEnum.Completed:
                         this.FinishDate = null;
+
                         break;
+
+                    case TaskStateEnum.Completed:
+                        if (this.SubTasks.Any() &&
+                           this.SubTasks.Any(sb => sb.ChildTask.TaskState != TaskStateEnum.Completed))
+                        {
+                            string completedDescription = EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Completed);
+
+                            throw new BusinessLogicException(
+                                $"It's not possible to change a Task's State to {completedDescription} unless all SubTasks are also {completedDescription}");
+                        }
+
+                        this.FinishDate = DateTime.Now;
+
+                        break;
+
                     default:
-                        throw new BusinessLogicException(
-                            $"There's no defined process to set a Task's state to {EnumHelper.GetDescription<TaskStateEnum>(destinyState)}");
+                        this.ThrowExceptionDestinyStateNotFound(destinyState);
+                        break;
                 }
+
+                this.TaskState = destinyState;
+            }
+        }
+
+        public void ChangeSubTaskState(Task taskToChange, TaskStateEnum destinyState)
+        {
+            if (taskToChange == null)
+                throw new BusinessLogicException("Please, informe a SubTask to be changed");
+
+            var subTask = this.SubTasks.FirstOrDefault(st => st.ChildTask.Id == taskToChange.Id)
+                ??
+                throw new BusinessLogicException("The SubTask does not belong to the current Task");
+
+            subTask.ChildTask.ChangeTaskState(destinyState);
+
+            switch (destinyState)
+            {
+                case TaskStateEnum.Planned:
+                    return;
+
+                case TaskStateEnum.InProgress:
+                    this.ChangeTaskState(destinyState);
+                    break;
+
+                case TaskStateEnum.Completed:
+
+                    if (this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
+                        this.ChangeTaskState(destinyState);
+
+                    break;
+
+                default:
+                    this.ThrowExceptionDestinyStateNotFound(destinyState);
+                    break;
             }
         }
 
@@ -167,5 +243,9 @@ namespace Tms.Domain
             this.Name = creatingTaskDto.Name;
             this.Description = creatingTaskDto.Description;
         }
+
+        private void ThrowExceptionDestinyStateNotFound(TaskStateEnum taskState) =>
+            throw new BusinessLogicException(
+                $"There's no defined process to set a Task's state to {EnumHelper.GetDescription<TaskStateEnum>(taskState)}");
     }
 }
