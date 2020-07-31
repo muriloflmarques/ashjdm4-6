@@ -2,7 +2,7 @@
 
 namespace Tms.Infra.CrossCutting.DTOs
 {
-    public class TaskDto
+    public struct TaskDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

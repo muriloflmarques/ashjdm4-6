@@ -65,3 +65,5 @@ Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.csproj.CoreCompileInputs.cache
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.MvcApplicationPartsAssemblyInfo.cs
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.MvcApplicationPartsAssemblyInfo.cache
+Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\AutoMapper.dll
+Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

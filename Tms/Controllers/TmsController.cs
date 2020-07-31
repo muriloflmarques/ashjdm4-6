@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using Tms.Infra.CrossCutting.DTOs;
 using Tms.Infra.Data.Interface;
 using Tms.Service.Interfaces;
@@ -16,7 +17,7 @@ namespace Tms.Controllers
         private readonly ITaskRepository _taskRepository;
         private readonly IUnitOfWork _uow;
 
-        public TmsController(ITaskService taskService, ITaskRepository taskRepository, 
+        public TmsController(ITaskService taskService, ITaskRepository taskRepository,
             IUnitOfWork uow)
         {
             this._taskService = taskService;
@@ -27,28 +28,34 @@ namespace Tms.Controllers
         [HttpGet]
         public ActionResult<TaskDto> Get(int id)
         {
-            return new TaskDto() { Name = "Teste" };
+            var teste = _taskRepository.FindParentTask(4);
+
+            var task = _taskRepository.SelectById(id);
+            var dto = _taskService.ConvertDomainToDto(task);
+
+            return dto;
         }
 
         [HttpGet("Test2")]
         public ActionResult<IEnumerable<TaskDto>> Get()
         {
-            var asd = _taskRepository.SelectByQuery(x => x.Name.Contains("Murilo"));
+            var tasks = _taskRepository
+                .SelectByQuery(x => x.Name.Contains("Murilo"))
+                ?.Select(t =>
+                {
+                    return _taskService.ConvertDomainToDto(t);
+                });
 
-
-
-            return null;
+            return Ok(tasks);
         }
 
         // POST api/<TmsController>
         [HttpPost]
         public ActionResult Post(TaskDto taskDto)
         {
-            _taskService.Test();
-            _taskService.Test2();
-           
+
             _uow.Commit();
-            
+
             return Ok();
         }
 

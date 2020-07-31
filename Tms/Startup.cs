@@ -1,15 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Data.Common;
-using Tms.Infra.CrossCutting.AutoMapper;
 using Tms.Infra.Data;
 using Tms.Infra.Data.Interface;
 using Tms.Service;
@@ -34,14 +31,6 @@ namespace Tms
 
             services.AddCors();
             services.AddControllers();
-
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new DomainToDtoMapper());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
 
             services.AddSwaggerGen(c =>
             {

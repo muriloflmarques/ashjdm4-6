@@ -10,13 +10,11 @@ namespace Tms.Infra.Data
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly TmsDbContext _tmsDbContext;
-        private readonly IQueryable<T> _entity;
+        protected readonly TmsDbContext _tmsDbContext;
 
         public BaseRepository(TmsDbContext tmsDbContext)
         {
             this._tmsDbContext = tmsDbContext;
-            this._entity = this._tmsDbContext.Set<T>().AsNoTracking();
         }
 
         public void Delete(T obj)
@@ -42,17 +40,17 @@ namespace Tms.Infra.Data
                 this.Insert(obj);
         }
 
-        public T SelectById(int id)
-        {
-            return _entity.FirstOrDefault(x => x.Id == id);
+        public virtual T SelectById(int id)
+        {            
+            return this.GetDbSet().FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<T> SelectByQuery(Expression<Func<T, bool>> query)
+        public virtual IEnumerable<T> SelectByQuery(Expression<Func<T, bool>> query)
         {
-            return _entity.Where(query).ToList();
+            return this.GetDbSet().Where(query).ToList();
         }
 
-        public T SelectFirstByQuery(Expression<Func<T, bool>> query)
+        public virtual T SelectFirstByQuery(Expression<Func<T, bool>> query)
         {
             return this.SelectByQuery(query).FirstOrDefault();
         }
@@ -78,5 +76,7 @@ namespace Tms.Infra.Data
         {
             if (obj == null) { }
         }
+
+        private IQueryable<T> GetDbSet() => this._tmsDbContext.Set<T>().AsNoTracking();
     }
 }
