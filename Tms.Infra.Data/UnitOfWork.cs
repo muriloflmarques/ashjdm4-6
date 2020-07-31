@@ -55,7 +55,7 @@ namespace Tms.Infra.Data
                 _tmsDbContext.SaveChanges();
                 _transaction.Commit();
             }
-            catch(Exception ex)
+            catch
             {
                 this.Rollback();
             }

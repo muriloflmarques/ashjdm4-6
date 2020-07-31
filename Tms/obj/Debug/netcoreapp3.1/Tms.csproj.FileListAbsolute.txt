@@ -7,8 +7,6 @@ Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.runtimeconfig.json
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.runtimeconfig.dev.json
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.dll
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.pdb
-Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\AutoMapper.dll
-Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
