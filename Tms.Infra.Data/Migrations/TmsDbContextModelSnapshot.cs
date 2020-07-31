@@ -21,10 +21,10 @@ namespace Tms.Infra.Data.Migrations
 
             modelBuilder.Entity("Tms.Domain.SubTask", b =>
                 {
-                    b.Property<int>("ParentTaskId")
+                    b.Property<int?>("ParentTaskId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ChildTaskId")
+                    b.Property<int?>("ChildTaskId")
                         .HasColumnType("int");
 
                     b.HasKey("ParentTaskId", "ChildTaskId");
@@ -59,6 +59,9 @@ namespace Tms.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
+
+                    b.Property<int?>("ParentTaskId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");

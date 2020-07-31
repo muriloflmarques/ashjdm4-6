@@ -10,8 +10,8 @@ using Tms.Infra.Data;
 namespace Tms.Infra.Data.Migrations
 {
     [DbContext(typeof(TmsDbContext))]
-    [Migration("20200731031044_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20200731173111_001")]
+    partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,10 @@ namespace Tms.Infra.Data.Migrations
 
             modelBuilder.Entity("Tms.Domain.SubTask", b =>
                 {
-                    b.Property<int>("ParentTaskId")
+                    b.Property<int?>("ParentTaskId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ChildTaskId")
+                    b.Property<int?>("ChildTaskId")
                         .HasColumnType("int");
 
                     b.HasKey("ParentTaskId", "ChildTaskId");
@@ -61,6 +61,9 @@ namespace Tms.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
+
+                    b.Property<int?>("ParentTaskId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");

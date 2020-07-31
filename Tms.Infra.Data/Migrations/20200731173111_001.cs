@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tms.Infra.Data.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class _001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,6 +16,7 @@ namespace Tms.Infra.Data.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     ChangeDate = table.Column<DateTime>(nullable: true),
                     DeleteDate = table.Column<DateTime>(nullable: true),
+                    ParentTaskId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(maxLength: 200, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: true),

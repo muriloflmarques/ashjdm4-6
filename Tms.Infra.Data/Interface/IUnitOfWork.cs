@@ -5,5 +5,7 @@
         void BeginTransaction();
         void Commit();
         void Rollback();
+
+        void AddRawCommand(RawSQlCommand rawSQlCommand);
     }
 }

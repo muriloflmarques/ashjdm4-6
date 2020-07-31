@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Tms.Infra.CrossCutting.CustomException;
+using Tms.Infra.CrossCutting.DTOs;
 using Tms.Infra.CrossCutting.Enums;
 using Tms.Infra.CrossCutting.Helpers;
 
@@ -29,6 +30,8 @@ namespace Tms.Domain
         private DateTime? _startDate;
         private DateTime? _finishDate;
         private ICollection<SubTask> _subTasks;
+
+        public int? ParentTaskId { get; private set; }
 
         public string Name
         {
@@ -68,16 +71,16 @@ namespace Tms.Domain
                 if (value.HasValue & this.StartDate > DateTime.Now)
                     throw new DomainRulesException("Start date can not be setted in the future");
 
-                _startDate = value; 
+                _startDate = value;
             }
         }
 
         public DateTime? FinishDate
         {
             get { return _finishDate; }
-            private set 
-            { 
-                if(!this.StartDate.HasValue)
+            private set
+            {
+                if (!this.StartDate.HasValue)
                     throw new DomainRulesException("You must informe a start date before setting finish date");
                 else if (value.HasValue & this.StartDate > value.Value)
                     throw new DomainRulesException("Finish date can not be smaller than start date");
@@ -94,23 +97,45 @@ namespace Tms.Domain
             private set { _subTasks = value; }
         }
 
-        public void AddNewSubTask(SubTask subTask)
+        public void AddSubTask(SubTask subTask)
         {
             if (subTask == null)
                 throw new BusinessLogicException("Please, informe a SubTask to be added");
 
-            if (!this.SubTasks.Any(st => st == subTask))
-                this.SubTasks.Add(subTask);
-
+            if (this.ParentTaskId.HasValue)
+                throw new BusinessLogicException("A SubTask can not hold any SubTask");
+            
             this.SubTasks.Add(subTask);
+
+            subTask.ChildTask.AddParentTaskId(this);
 
             if (this.TaskState == TaskStateEnum.Completed)
                 this.AlterTaskState(TaskStateEnum.Planned);
         }
 
+        public SubTask RemoveSubTask(Task task)
+        {
+            if (task == null)
+                throw new BusinessLogicException("Please, informe a SubTask to be removed");
+
+            var subTask = this.SubTasks.FirstOrDefault(st => st.ChildTask.Id == task.Id)
+                ??
+                throw new BusinessLogicException("The SubTask does not belong to the current Task");
+
+            this.SubTasks.Remove(subTask);
+
+            subTask.ChildTask.RemoveParentTaskId();
+
+            if (this.SubTasks.Any() && 
+                this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
+                this.AlterTaskState(TaskStateEnum.Completed);
+
+            return subTask;
+        }
+
         public void AlterTaskState(TaskStateEnum destinyState)
         {
-            if(this.TaskState != destinyState)
+            if (this.TaskState != destinyState)
             {
                 switch (destinyState)
                 {
@@ -129,6 +154,18 @@ namespace Tms.Domain
                             $"There's no defined process to set a Task's state to {EnumHelper.GetDescription<TaskStateEnum>(destinyState)}");
                 }
             }
+        }
+
+        public void AddParentTaskId(Task task) =>
+            this.ParentTaskId = task.Id;
+
+        public void RemoveParentTaskId() =>
+            this.ParentTaskId = null;
+
+        public void UpdateNameAndDescription(CreatingTaskDto creatingTaskDto)
+        {
+            this.Name = creatingTaskDto.Name;
+            this.Description = creatingTaskDto.Description;
         }
     }
 }

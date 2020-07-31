@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,7 +7,7 @@ using Tms.Infra.Data.Interface;
 
 namespace Tms.Infra.Data
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         protected readonly TmsDbContext _tmsDbContext;
 
@@ -40,20 +39,16 @@ namespace Tms.Infra.Data
                 this.Insert(obj);
         }
 
-        public virtual T SelectById(int id)
-        {            
-            return this.GetDbSet().FirstOrDefault(x => x.Id == id);
-        }
+        public T SelectById(IQueryable<T> dbSet, int id) =>
+            dbSet.FirstOrDefault(x => x.Id == id);
 
-        public virtual IEnumerable<T> SelectByQuery(Expression<Func<T, bool>> query)
-        {
-            return this.GetDbSet().Where(query).ToList();
-        }
+        public IEnumerable<T> SelectByQuery(IQueryable<T> dbSet, 
+            Expression<Func<T, bool>> query) =>
+            dbSet.Where(query).ToList();
 
-        public virtual T SelectFirstByQuery(Expression<Func<T, bool>> query)
-        {
-            return this.SelectByQuery(query).FirstOrDefault();
-        }
+        public T SelectFirstByQuery(IQueryable<T> dbSet,
+             Expression<Func<T, bool>> query) =>
+            this.SelectByQuery(dbSet, query).FirstOrDefault();
 
         public void Update(T obj)
         {
@@ -77,6 +72,10 @@ namespace Tms.Infra.Data
             if (obj == null) { }
         }
 
-        private IQueryable<T> GetDbSet() => this._tmsDbContext.Set<T>().AsNoTracking();
+        public abstract IQueryable<T> GetDbSet();
+
+        public abstract IQueryable<T> GetDbSetWithDefaultInclude();
+
+        public TmsDbContext GetDbContext() => _tmsDbContext;
     }
 }

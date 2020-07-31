@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using Tms.Infra.CrossCutting.Configurations;
@@ -27,8 +28,20 @@ namespace Tms
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TmsDbContext>(options =>
-                options.UseSqlServer(Configuration.GetSection("ConnectionsStrings:TmsTasks_Dev_ConnectionString").Value));
+            services.AddLogging(loggingBuilder => {
+                loggingBuilder.AddConsole()
+                    .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information);
+                loggingBuilder.AddConsole()
+                    .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Error);
+                loggingBuilder.AddConsole()
+                    .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Warning);
+                loggingBuilder.AddDebug();
+            });
+
+            services.AddDbContext<TmsDbContext>(options => {
+                options.UseSqlServer(Configuration.GetSection("ConnectionsStrings:TmsTasks_Dev_ConnectionString").Value);
+                options.EnableSensitiveDataLogging(true);
+            });
 
             services.AddCors();
             services.AddControllers();

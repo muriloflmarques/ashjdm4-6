@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Tms.Infra.CrossCutting.DTOs;
 using Tms.Infra.Data.Interface;
 using Tms.Service.Interfaces;
@@ -25,32 +26,54 @@ namespace Tms.Controllers
             this._uow = uow;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<TaskDto>> Get()
+        [HttpGet("GetTasksWithoutSubtasks")]
+        public ActionResult<IEnumerable<TaskDto>> GetTasksWithoutSubtasks()
         {
-            var tasks = _taskRepository.SelectTop();
+            var tasks = _taskService.SelectTasksWithoutSubtasks();
+
+            if (!tasks.Any())
+                return Ok(null);
+
+            var dtos = tasks
+                ?.Select(task => { return _taskService.ConvertDomainToDto(task); })
+                .ToList();
+            
+            return Ok(dtos);
+        }
+
+        [HttpGet("TasksWithSubtasks")]
+        public ActionResult<IEnumerable<TaskDto>> GetTasksWithSubtasks()
+        {
+            var tasks = _taskService.SelectTasksWithSubtasks();
+
+            if (!tasks.Any())
+                return Ok(null);
 
             var dtos = tasks
                 ?.Select(task => { return _taskService.ConvertDomainToDto(task); })
                 .ToList();
 
-            return dtos;
+            return Ok(dtos);
         }
 
         [HttpGet("{id}")]
         public ActionResult<TaskDto> Get(int id)
         {
             var task = _taskRepository.SelectById(id);
+
+            if (task == null)
+                return Ok(null);
+
             var dto = _taskService.ConvertDomainToDto(task);
 
-            return dto;
+            return Ok(dto);
         }
 
         // POST api/<TmsController>/NewTask
         [HttpPost("NewTask")]
-        public ActionResult Post(CreatingTaskDto creatingTaskDto)
+        public IActionResult Post(CreatingTaskDto creatingTaskDto)
         {
-            if (creatingTaskDto.ParentTaskId <= 0)
+            if (creatingTaskDto.ParentTaskId > 0)
                 _taskService.CreateNewSubTask(creatingTaskDto);
             else
                 _taskService.CreateNewTask(creatingTaskDto);
@@ -80,16 +103,26 @@ namespace Tms.Controllers
         //{
         //}
 
-        //// PUT api/<TmsController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // PUT api/<TmsController>/5
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, [FromBody] CreatingTaskDto creatingTaskDto)
+        {
+            _taskService.UpdateNewTask(id, creatingTaskDto);
 
-        //// DELETE api/<TmsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+            _uow.Commit();
+
+            return Ok();
+        }
+
+        // delete api/<tmscontroller>/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            _taskService.DeleteTask(id);
+
+            _uow.Commit();
+
+            return Ok();
+        }
     }
 }

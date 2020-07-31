@@ -5,7 +5,9 @@ namespace Tms.Infra.Data
     public class TmsDbContext : DbContext
     {
         public TmsDbContext(DbContextOptions<TmsDbContext> dbContextOptions)
-            : base(dbContextOptions) { }
+            : base(dbContextOptions) 
+        {
+        }
 
         public DbSet<Domain.Task> Tasks { get; set; }
         public DbSet<Domain.SubTask> SubTasks { get; set; }
@@ -34,6 +36,8 @@ namespace Tms.Infra.Data
 
             modelBuilder.Entity<Domain.Task>()
                 .HasQueryFilter(x => x.DeleteDate == null);
+
+
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Tms.Domain;
 
@@ -14,8 +15,12 @@ namespace Tms.Infra.Data.Interface
         void Delete(T obj);
         void Delete(IEnumerable<T> objs);
 
-        T SelectById(int id);
-        IEnumerable<T> SelectByQuery(Expression<Func<T, bool>> query);
-        T SelectFirstByQuery(Expression<Func<T, bool>> query);
+        T SelectById(IQueryable<T> dbSet, int id);
+        IEnumerable<T> SelectByQuery(IQueryable<T> dbSet, Expression<Func<T, bool>> query);
+        T SelectFirstByQuery(IQueryable<T> dbSet, Expression<Func<T, bool>> query);
+
+        IQueryable<T> GetDbSet();
+        IQueryable<T> GetDbSetWithDefaultInclude();
+        TmsDbContext GetDbContext();
     }
 }

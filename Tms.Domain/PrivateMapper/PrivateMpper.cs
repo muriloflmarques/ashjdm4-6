@@ -9,12 +9,14 @@ namespace Tms.Domain.PrivateMapper
     {
         public static TaskDto MapToDto(this Task task)
         {
-            return 
+            return
                 task == null ?
                 new TaskDto()
                 :
                 new TaskDto()
                 {
+                    ParentTaskId = task.ParentTaskId,
+
                     Id = task.Id,
                     Name = task.Name,
                     Description = task.Description,
@@ -30,9 +32,7 @@ namespace Tms.Domain.PrivateMapper
                 };
         }
 
-        public static Task MapToDomain(this CreatingTaskDto creatingTaskDto)
-        {
-            return new Task(creatingTaskDto.Name, creatingTaskDto.Description);
-        }
+        public static Task MapToDomain(this CreatingTaskDto creatingTaskDto) =>
+            new Task(creatingTaskDto.Name, creatingTaskDto.Description);
     }
 }
