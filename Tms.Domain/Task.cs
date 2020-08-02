@@ -105,18 +105,60 @@ namespace Tms.Domain
             if (this.ParentTaskId.HasValue)
                 throw new BusinessLogicException("A SubTask can not hold any SubTask");
 
+            if (subTask.ParentTask != this)
+                throw new BusinessLogicException("The current SubTask belongs to another Task");
+
             this.SubTasks.Add(subTask);
 
             subTask.ChildTask.AddParentTaskId(this);
 
-            if (this.TaskState == TaskStateEnum.Completed)
-                this.ChangeTaskState(TaskStateEnum.Planned);
+
+            //When adding a New SubTask is essencial that we assure the corret Parent's State
+
+            switch (this.TaskState)
+            {
+                //If Parent's State still Planned
+                case TaskStateEnum.Planned:
+                    //then it can go to InProgress if the new SubStask has InProgress as it's State
+                    if (subTask.ChildTask.TaskState == TaskStateEnum.InProgress)
+                        this.ChangeTaskState(TaskStateEnum.InProgress);
+
+                    //or it can go to Completed (following the status progression) if the new
+                    //SubStask has Completed as it's State
+                    else if (subTask.ChildTask.TaskState == TaskStateEnum.Completed)
+                    {
+                        this.ChangeTaskState(TaskStateEnum.InProgress);
+                        this.ChangeTaskState(TaskStateEnum.Completed);
+                    }
+
+                    break;
+
+                //If Parent's State is InProgressit means that theres a SubTask in InProgress Status or any SubTask at all
+                case TaskStateEnum.InProgress:
+                    //and it doesn't have any SubTask InProgress, than the Parent should follow the SubTask's Status
+                    if (subTask.ChildTask.TaskState != TaskStateEnum.InProgress
+                        && this.SubTasks.All(st => st.ChildTask.TaskState != TaskStateEnum.InProgress))
+                        this.ChangeTaskState(subTask.ChildTask.TaskState);
+                    break;
+
+                //If Parent's State is Complete (it means all it SubTasks are also in Complete Status)
+                case TaskStateEnum.Completed:
+                    //and the added SubTask is not Complete than the Parent should have the same Status as the SubTask
+                    if (subTask.ChildTask.TaskState != TaskStateEnum.Completed)
+                        this.ChangeTaskState(subTask.ChildTask.TaskState);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public SubTask RemoveSubTask(Task task)
         {
             if (task == null)
                 throw new BusinessLogicException("Please, informe a SubTask to be removed");
+
+            if (this.SubTasks.Count <= 0)
+                throw new BusinessLogicException("The current Task has no SubTasks");
 
             var subTask = this.SubTasks.FirstOrDefault(st => st.ChildTask.Id == task.Id)
                 ??
@@ -210,30 +252,20 @@ namespace Tms.Domain
 
             subTask.ChildTask.ChangeTaskState(destinyState);
 
-            switch (destinyState)
-            {
-                case TaskStateEnum.Planned:
-                    return;
 
-                case TaskStateEnum.InProgress:
-                    this.ChangeTaskState(destinyState);
-                    break;
+            //When changing one SubTask's State the Parent Task should be aware of it's own State
 
-                case TaskStateEnum.Completed:
-
-                    if (this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
-                        this.ChangeTaskState(destinyState);
-
-                    break;
-
-                default:
-                    this.ThrowExceptionDestinyStateNotFound(destinyState);
-                    break;
-            }
+            //Checking "Any" before of "All" maximixe the changes of not having to go through the whole collection
+            if (this.SubTasks.Any(st => st.ChildTask.TaskState == TaskStateEnum.InProgress))
+                this.ChangeTaskState(TaskStateEnum.InProgress);
+            else if (this.SubTasks.All(st => st.ChildTask.TaskState == TaskStateEnum.Completed))
+                this.ChangeTaskState(TaskStateEnum.Completed);
+            else
+                this.ChangeTaskState(TaskStateEnum.Planned);
         }
 
         public void AddParentTaskId(Task task) =>
-            this.ParentTaskId = task.Id;
+            this.ParentTaskId = task?.Id;
 
         public void RemoveParentTaskId() =>
             this.ParentTaskId = null;
@@ -244,8 +276,7 @@ namespace Tms.Domain
             this.Description = creatingTaskDto.Description;
         }
 
-        private void ThrowExceptionDestinyStateNotFound(TaskStateEnum taskState) =>
-            throw new BusinessLogicException(
-                $"There's no defined process to set a Task's state to {EnumHelper.GetDescription<TaskStateEnum>(taskState)}");
+        private void ThrowExceptionDestinyStateNotFound(TaskStateEnum destinyState) =>
+            throw new BusinessLogicException($"The informed status ({(int)destinyState}) does not exist");
     }
 }

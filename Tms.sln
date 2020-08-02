@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tms", "Tms\Tms.csproj", "{3479C419-D034-49CD-B8C2-CC571D836181}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tms.Domain", "Tms.Domain\Tms.Domain.csproj", "{6BA74590-0CD0-4202-B401-56E16600313C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tms.Domain", "Tms.Domain\Tms.Domain.csproj", "{6BA74590-0CD0-4202-B401-56E16600313C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tms.Infra.CrossCutting", "Tms.Infra.CrossCutting\Tms.Infra.CrossCutting.csproj", "{E868C84E-076E-4109-B18D-88DE9CD167B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tms.Infra.CrossCutting", "Tms.Infra.CrossCutting\Tms.Infra.CrossCutting.csproj", "{E868C84E-076E-4109-B18D-88DE9CD167B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tms.Infra.Data", "Tms.Infra.Data\Tms.Infra.Data.csproj", "{77FF2DC3-3402-4303-9550-9F59D2E4CFB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tms.Infra.Data", "Tms.Infra.Data\Tms.Infra.Data.csproj", "{77FF2DC3-3402-4303-9550-9F59D2E4CFB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tms.Service", "Tms.Service\Tms.Service.csproj", "{18C9A6A1-0A0C-4FD0-9C6A-C7FA38A1384B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tms.Service", "Tms.Service\Tms.Service.csproj", "{18C9A6A1-0A0C-4FD0-9C6A-C7FA38A1384B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tms.Test", "Tms.Test\Tms.Test.csproj", "{F126C355-429F-4ED9-8CD1-BDE96F498ADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{18C9A6A1-0A0C-4FD0-9C6A-C7FA38A1384B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18C9A6A1-0A0C-4FD0-9C6A-C7FA38A1384B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18C9A6A1-0A0C-4FD0-9C6A-C7FA38A1384B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F126C355-429F-4ED9-8CD1-BDE96F498ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F126C355-429F-4ED9-8CD1-BDE96F498ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F126C355-429F-4ED9-8CD1-BDE96F498ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F126C355-429F-4ED9-8CD1-BDE96F498ADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 
 namespace Tms.Infra.CrossCutting.DTOs
 {
+    //All DTOs are structs, it ensures that after populated the data will be always immutable
     public struct TaskDto
     {
         public int? ParentTaskId { get; set; }

@@ -1,0 +1,427 @@
+{
+  "format": 1,
+  "restore": {
+    "Z:\\Projects\\ashjdm4-6\\Tms.Test\\Tms.Test.csproj": {}
+  },
+  "projects": {
+    "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj",
+        "projectName": "Tms.Domain",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj",
+        "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj",
+        "projectName": "Tms.Infra.CrossCutting",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj",
+        "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj",
+        "projectName": "Tms.Infra.Data",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj",
+        "projectName": "Tms.Service",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj",
+        "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj"
+              },
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "Z:\\Projects\\ashjdm4-6\\Tms.Test\\Tms.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms.Test\\Tms.Test.csproj",
+        "projectName": "Tms.Test",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Test\\Tms.Test.csproj",
+        "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms.Test\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Domain\\Tms.Domain.csproj"
+              },
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj"
+              },
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj"
+              },
+              "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj"
+              },
+              "Z:\\Projects\\ashjdm4-6\\Tms\\Tms.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms\\Tms.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "Z:\\Projects\\ashjdm4-6\\Tms\\Tms.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Z:\\Projects\\ashjdm4-6\\Tms\\Tms.csproj",
+        "projectName": "Tms",
+        "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms\\Tms.csproj",
+        "packagesPath": "C:\\Users\\Murilo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Projects\\ashjdm4-6\\Tms\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Murilo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.CrossCutting\\Tms.Infra.CrossCutting.csproj"
+              },
+              "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Infra.Data\\Tms.Infra.Data.csproj"
+              },
+              "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj": {
+                "projectPath": "Z:\\Projects\\ashjdm4-6\\Tms.Service\\Tms.Service.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUi": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tms.Domain\Tms.Domain.csproj" />
+    <ProjectReference Include="..\Tms.Infra.CrossCutting\Tms.Infra.CrossCutting.csproj" />
+    <ProjectReference Include="..\Tms.Infra.Data\Tms.Infra.Data.csproj" />
+    <ProjectReference Include="..\Tms.Service\Tms.Service.csproj" />
+    <ProjectReference Include="..\Tms\Tms.csproj" />
+  </ItemGroup>
+
+</Project>

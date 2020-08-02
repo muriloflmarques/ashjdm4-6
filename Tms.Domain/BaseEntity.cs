@@ -17,7 +17,7 @@ namespace Tms.Domain
         public void SetDeleteDate() => this.DeleteDate = DateTime.Now;
 
         [Key]
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         public DateTime CreationDate { get; private set; }
         public DateTime? ChangeDate { get; private set; }
