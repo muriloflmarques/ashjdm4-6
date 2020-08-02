@@ -94,7 +94,6 @@ namespace Tms.Service
             if (taskToUpdate.ParentTaskId.HasValue)
             {
                 var dbSet = this.GetDbSetAsNoTrackingWithDefaultIncludes();
-                    //_taskRepository.AddDefaultIncludeIntoDbSet(_taskRepository.GetDbSet());
 
                 var parentTask =
                     _taskRepository.SelectById(dbSet, taskToUpdate.ParentTaskId.Value)

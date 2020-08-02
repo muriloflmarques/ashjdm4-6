@@ -45,7 +45,7 @@ namespace Tms.Domain
                     throw new DomainRulesException("The Task's name can not be longer than 40 characteres");
 
                 if (value.Length < 3)
-                    throw new DomainRulesException("The Task's name can not be shorter than 3 characteres");
+                    throw new DomainRulesException("The Task's name can not have less than 3 characteres");
 
                 _name = value;
             }

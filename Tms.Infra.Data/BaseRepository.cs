@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Tms.Domain;
+using Tms.Infra.CrossCutting.CustomException;
 using Tms.Infra.Data.Interface;
 
 namespace Tms.Infra.Data
@@ -18,6 +19,8 @@ namespace Tms.Infra.Data
 
         public void Delete(T obj)
         {
+            this.CheckIfNull(obj);
+
             obj.SetDeleteDate();
             this.Update(obj);
         }
@@ -30,6 +33,8 @@ namespace Tms.Infra.Data
 
         public void Insert(T obj)
         {
+            this.CheckIfNull(obj);
+
             _tmsDbContext.Add(obj);
         }
 
@@ -52,6 +57,8 @@ namespace Tms.Infra.Data
 
         public void Update(T obj)
         {
+            this.CheckIfNull(obj);
+
             obj.SetChangeDate();
             this._tmsDbContext.Update(obj);
         }
@@ -69,7 +76,8 @@ namespace Tms.Infra.Data
 
         private void CheckIfNull(T obj)
         {
-            if (obj == null) { }
+            if (obj == null)
+                throw new BusinessLogicException("Error while performing operation into Database");
         }
 
         public abstract IQueryable<T> GetDbSet();
