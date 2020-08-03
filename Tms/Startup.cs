@@ -19,18 +19,20 @@ namespace Tms
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment hostEnvironment)
         {
             Configuration = configuration;
+            HostEnvironment = hostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
             //Adding Log only when no prod
-            if (!env.IsProduction())
+            if (!this.HostEnvironment.IsProduction())
             {
                 services.AddLogging(loggingBuilder =>
                 {
@@ -48,7 +50,7 @@ namespace Tms
                 options.UseSqlServer(Configuration.GetSection("ConnectionsStrings:TmsTasks_Dev_ConnectionString").Value);
 
                 //Enble Sensitive log only when not production
-                if (!env.IsProduction())
+                if (!this.HostEnvironment.IsProduction())
                     options.EnableSensitiveDataLogging(true);
             });
 

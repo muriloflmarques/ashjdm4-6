@@ -8,6 +8,8 @@
     /// </summary>
     public enum TaskStateEnum
     {
+        //I usualy leave "empty numbers" between enums so if the domain changes and a new value addition is needed
+        //then the logical evolution can be follwed by the numeric evolution, making it easy to see in any log
         [EnumValueAsText("Planned")]
         Planned = 0,
 

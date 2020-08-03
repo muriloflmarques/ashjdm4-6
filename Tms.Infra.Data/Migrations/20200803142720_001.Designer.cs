@@ -10,7 +10,7 @@ using Tms.Infra.Data;
 namespace Tms.Infra.Data.Migrations
 {
     [DbContext(typeof(TmsDbContext))]
-    [Migration("20200802180921_001")]
+    [Migration("20200803142720_001")]
     partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

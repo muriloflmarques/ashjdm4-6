@@ -6,14 +6,12 @@ namespace Tms.Service.Interfaces
 {
     public interface ITaskService
     {
-        void ChangeTaskState(int id, TaskStateEnum destinyState);
-        void UpdateTask(int id, CreatingTaskDto creatingTaskDto);
-        void CreateNewTask(CreatingTaskDto creatingTaskDto);
-        void CreateNewSubTask(CreatingTaskDto creatingTaskDto);
+        TaskDto ChangeTaskState(int id, TaskStateEnum destinyState, bool commit = false);
+        TaskDto UpdateTask(int id, CreatingTaskDto creatingTaskDto, bool commit = false);
+        TaskDto CreateNewTask(CreatingTaskDto creatingTaskDto, bool commit = false);
+        TaskDto CreateNewSubTask(CreatingTaskDto creatingTaskDto, bool commit = false);
         void DeleteTask(int id);
-        IEnumerable<Domain.Task> SelectTasksWithoutSubtasks();
-        IEnumerable<Domain.Task> SelectTasksWithSubtasks();
-
-        TaskDto ConvertDomainToDto(Domain.Task task);
+        IEnumerable<TaskDto> SelectTasksWithoutSubtasks();
+        IEnumerable<TaskDto> SelectTasksWithSubtasks();
     }
 }

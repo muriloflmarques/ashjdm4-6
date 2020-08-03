@@ -5,7 +5,6 @@ using System.Linq;
 using Tms.Infra.CrossCutting.CustomException;
 using Tms.Infra.CrossCutting.DTOs;
 using Tms.Infra.CrossCutting.Enums;
-using Tms.Infra.CrossCutting.Helpers;
 
 namespace Tms.Domain
 {

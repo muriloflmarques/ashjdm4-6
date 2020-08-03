@@ -24,14 +24,6 @@ namespace Tms.Service
         }
 
         /// <summary>
-        /// Facade to make conversion between Domain and DTO accessible
-        /// </summary>
-        /// <param name="task"></param>
-        /// <returns>TaskDto fully filled with data</returns>
-        public TaskDto ConvertDomainToDto(Task task) =>
-            task.MapToDto();
-
-        /// <summary>
         /// This method registers in the current SQL Transaction a command to perform the
         /// Delete of a SubTask entity
         /// </summary>
@@ -55,7 +47,7 @@ namespace Tms.Service
         /// <summary>
         /// Method for updating a Task
         /// </summary>
-        public void UpdateTask(int id, CreatingTaskDto creatingTaskDto)
+        public TaskDto UpdateTask(int id, CreatingTaskDto creatingTaskDto, bool commit = false)
         {
             //Find the Task that will be updated or Throw Exception
             var updatedTask = _taskRepository.SelectById(id)
@@ -96,12 +88,21 @@ namespace Tms.Service
 
             //Set all the changes to be commited by the Unit of Work
             _taskRepository.Update(updatedTask);
+
+            if (commit)
+            {
+                //Commit the changes done by the Service
+                _uow.Commit();
+            }
+
+            //Do not return Domain to Application
+            return updatedTask.MapToDto();
         }
 
         /// <summary>
         /// Method to update a Task's State
         /// </summary>
-        public void ChangeTaskState(int id, TaskStateEnum destinyState)
+        public TaskDto ChangeTaskState(int id, TaskStateEnum destinyState, bool commit = false)
         {
             //Find the Task that will be updated or Throw Exception
             var taskToUpdate = _taskRepository.SelectById(id)
@@ -131,24 +132,42 @@ namespace Tms.Service
                 //Set all the changes to be commited by the Unit of Work
                 _taskRepository.Update(taskToUpdate);
             }
+
+            if (commit)
+            {
+                //Commit the changes done by the Service
+                _uow.Commit();
+            }
+
+            //Do not return Domain to Application
+            return taskToUpdate.MapToDto();
         }
 
         /// <summary>
         /// Method to create a new Task
         /// </summary>
-        public void CreateNewTask(CreatingTaskDto creatingTaskDto)
+        public TaskDto CreateNewTask(CreatingTaskDto creatingTaskDto, bool commit = false)
         {
             //Use the private map to Map the DTO from Application to a Domain entity
             var task = creatingTaskDto.MapToDomain();
 
             //Set all the changes to be commited by the Unit of Work
             _taskRepository.Insert(task);
+
+            if (commit)
+            {
+                //Commit the changes done by the Service
+                _uow.Commit();
+            }
+
+            //Do not return Domain to Application
+            return task.MapToDto();
         }
 
         /// <summary>
         /// Method to create a new Task and immediatily associate it as a Child to another Task
         /// </summary>
-        public void CreateNewSubTask(CreatingTaskDto creatingTaskDto)
+        public TaskDto CreateNewSubTask(CreatingTaskDto creatingTaskDto, bool commit = false)
         {
             //Select the informed Parent Task or Throw Exception
             var parentTask = _taskRepository.SelectById(creatingTaskDto.ParentTaskId)
@@ -163,6 +182,15 @@ namespace Tms.Service
 
             //Set all the changes to be commited by the Unit of Work
             _taskRepository.Update(parentTask);
+
+            if (commit)
+            {
+                //Commit the changes done by the Service
+                _uow.Commit();
+            }
+
+            //Do not return Domain to Application
+            return parentTask.MapToDto();
         }
 
         /// <summary>
@@ -209,24 +237,31 @@ namespace Tms.Service
         /// Method to Select all the Tasks without hierarchy, it said, there won't be any Join with
         /// SubTask the determine if the Task is a Parent or a Child
         /// </summary>
-        public IEnumerable<Domain.Task> SelectTasksWithoutSubtasks()
+        public IEnumerable<TaskDto> SelectTasksWithoutSubtasks()
         {
-            return _taskRepository.SelectTop(
-                _taskRepository.GetDbSetAsNoTracking(),
-                task => task.Id > 0);
+            //Do NOT execute Joins
+            var dbSet = _taskRepository.GetDbSetAsNoTracking();
+
+            var taskList = _taskRepository.SelectTop(dbSet, task => task.Id > 0);
+
+            //Do not return Domain to Application
+            return taskList?.Select(task => { return task.MapToDto(); });
         }
 
         /// <summary>
         /// Method to Select all the Tasks WITH hierarchy, this way if a Task is a Child it will not
         /// appear on the root element, being only shown as a element of it's parent
         /// </summary>
-        public IEnumerable<Domain.Task> SelectTasksWithSubtasks()
+        public IEnumerable<TaskDto> SelectTasksWithSubtasks()
         {
+            //Do execute Joins
             var dbSet = _taskRepository
                 .AddDefaultIncludeIntoDbSet(_taskRepository.GetDbSetAsNoTracking());
 
-            return _taskRepository.SelectTop(dbSet,
-                task => !task.ParentTaskId.HasValue);
+            var taskList = _taskRepository.SelectTop(dbSet, task => !task.ParentTaskId.HasValue);
+
+            //Do not return Domain to Application
+            return taskList?.Select(task => { return task.MapToDto(); });
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Tms.Infra.Data
         public TmsDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<TmsDbContext>();
-            optionsBuilder.UseSqlServer("server=localhost;database=TmsTasks_Dev;User Id=sa;Password=d3&j*D1AlC#54jFbo)fw@58lG;");
+            optionsBuilder.UseSqlServer("STRING_CONNECTION");
 
             return new TmsDbContext(optionsBuilder.Options);
         }

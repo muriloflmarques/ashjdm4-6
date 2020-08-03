@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Tms.Domain.PrivateMapper;
 using Tms.Infra.CrossCutting.CustomException;
 using Tms.Infra.CrossCutting.DTOs;
 using Tms.Infra.CrossCutting.Enums;
@@ -36,16 +35,9 @@ namespace Tms.Controllers
         [HttpGet("GetTasksWithoutSubtasks")]
         public ActionResult<IEnumerable<TaskDto>> GetTasksWithoutSubtasks()
         {
-            var tasks = _taskService.SelectTasksWithoutSubtasks();
+            var taskDtoList = _taskService.SelectTasksWithoutSubtasks();
 
-            if (!tasks.Any())
-                return Ok(null);
-
-            var dtos = tasks
-                ?.Select(task => { return _taskService.ConvertDomainToDto(task); })
-                .ToList();
-            
-            return Ok(dtos);
+            return Ok(taskDtoList);
         }
 
         /// <summary>
@@ -55,16 +47,9 @@ namespace Tms.Controllers
         [HttpGet("TasksWithSubtasks")]
         public ActionResult<IEnumerable<TaskDto>> GetTasksWithSubtasks()
         {
-            var tasks = _taskService.SelectTasksWithSubtasks();
+            var taskDtoList = _taskService.SelectTasksWithSubtasks();
 
-            if (!tasks.Any())
-                return Ok(null);
-
-            var dtos = tasks
-                ?.Select(task => { return _taskService.ConvertDomainToDto(task); })
-                .ToList();
-
-            return Ok(dtos);
+            return Ok(taskDtoList);
         }
 
         /// <summary>
@@ -74,14 +59,9 @@ namespace Tms.Controllers
         [HttpGet("{id}")]
         public ActionResult<TaskDto> Get(int id)
         {
-            var task = _taskRepository.SelectById(id);
+            var taskDto = _taskRepository.SelectById(id)?.MapToDto();
 
-            if (task == null)
-                return Ok(null);
-
-            var dto = _taskService.ConvertDomainToDto(task);
-
-            return Ok(dto);
+            return Ok(taskDto);
         }
 
         /// <summary>
@@ -91,15 +71,14 @@ namespace Tms.Controllers
         [HttpPost("NewTask")]
         public IActionResult Post(CreatingTaskDto creatingTaskDto)
         {
+            TaskDto taskDto;
+
             if (creatingTaskDto.ParentTaskId > 0)
-                _taskService.CreateNewSubTask(creatingTaskDto);
+                taskDto = _taskService.CreateNewSubTask(creatingTaskDto, commit: true);
             else
-                _taskService.CreateNewTask(creatingTaskDto);
+                taskDto = _taskService.CreateNewTask(creatingTaskDto, commit: true);
 
-            //Commit the changes done by the Service
-            _uow.Commit();
-
-            return Ok();
+            return Ok(taskDto);
         }
 
         /// <summary>
@@ -108,12 +87,9 @@ namespace Tms.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] CreatingTaskDto creatingTaskDto)
         {
-            _taskService.UpdateTask(id, creatingTaskDto);
+            var taskDto = _taskService.UpdateTask(id, creatingTaskDto, commit: true);
 
-            //Commit the changes done by the Service
-            _uow.Commit();
-
-            return Ok();
+            return Ok(taskDto);
         }
 
         /// <summary>
@@ -126,12 +102,9 @@ namespace Tms.Controllers
             if (!Enum.IsDefined(typeof(TaskStateEnum), taskState))
                 throw new DomainRulesException($"The informed Task State ({taskState}) is not valid");
 
-            _taskService.ChangeTaskState(id, (TaskStateEnum)taskState);
+            var taskDto = _taskService.ChangeTaskState(id, (TaskStateEnum)taskState, commit: true);
 
-            //Commit the changes done by the Service
-            _uow.Commit();
-
-            return Ok();
+            return Ok(taskDto);
         }
 
         /// <summary>
