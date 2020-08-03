@@ -66,8 +66,4 @@ Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.dll
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.pdb
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.genruntimeconfig.cache
 Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.xml
-Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.xml
-Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.Infra.Data.xml
-Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.Service.xml
-Z:\Projects\ashjdm4-6\Tms\bin\Debug\netcoreapp3.1\Tms.Domain.xml
 Z:\Projects\ashjdm4-6\Tms\obj\Debug\netcoreapp3.1\Tms.xml

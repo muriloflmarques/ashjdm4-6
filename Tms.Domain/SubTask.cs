@@ -1,5 +1,8 @@
 ﻿namespace Tms.Domain
 {
+    /// <summary>
+    /// Dummy entity only to perform a self-related relashionship
+    /// </summary>
     public class SubTask
     {
         protected SubTask() { }

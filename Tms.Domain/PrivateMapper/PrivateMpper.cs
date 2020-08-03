@@ -5,6 +5,9 @@ using Tms.Infra.CrossCutting.Helpers;
 
 namespace Tms.Domain.PrivateMapper
 {
+    /// <summary>
+    /// Private Mapper to send Domain data to the Application
+    /// </summary>
     public static class PrivateMpper
     {
         public static TaskDto MapToDto(this Task task)

@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Tms.Infra.Data
 {
+    /// <summary>
+    /// Factory to run Migrations on command line
+    /// </summary>
     public class TmsDbContextFactory : IDesignTimeDbContextFactory<TmsDbContext>
     {
         public TmsDbContext CreateDbContext(string[] args)

@@ -113,7 +113,7 @@ namespace Tms.Domain
             subTask.ChildTask.AddParentTaskId(this);
 
 
-            //When adding a New SubTask is essencial that we assure the corret Parent's State
+            //When adding a New SubTask it's essencial that we assure the corret Parent's State
 
             switch (this.TaskState)
             {
@@ -168,70 +168,43 @@ namespace Tms.Domain
 
             subTask.ChildTask.RemoveParentTaskId();
 
-            if (this.SubTasks.Any() &&
-                this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
-                this.ChangeTaskState(TaskStateEnum.Completed);
+            //When changing one SubTask's State the Parent Task should be aware of it's own State
+            this.ChangeTaskState(GetWhichStateTheParentTaskShouldBe());
 
             return subTask;
         }
 
         public void ChangeTaskState(TaskStateEnum destinyState)
         {
+            //If a Task has Children then it's state is determined by it's childen's state
+            if (this.SubTasks.Any())
+                throw new DomainRulesException("A parent Task's state can only be changed by changing it's children's Tasks state");
+
             if (this.TaskState != destinyState)
             {
                 switch (destinyState)
                 {
+                    //A Planned Task hasn't started nor finished
                     case TaskStateEnum.Planned:
-                        if (this.SubTasks.Any())
-                        {
-                            if (this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
-                                throw new BusinessLogicException(
-                                    $"It's not possible to change a Task's State to {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Planned)} when all of it's SubTasks are {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Completed)}");
-
-                            else if (this.SubTasks.Any(sb => sb.ChildTask.TaskState == TaskStateEnum.InProgress))
-                                throw new BusinessLogicException(
-                                    $"It's not possible to change a Task's State to {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Planned)} if it has at least one SubTask as {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.InProgress)}");
-                        }
-
                         this.StartDate =
                             this.FinishDate = null;
 
                         break;
 
+                    //A Task in InProgress hasn't finished but has started
                     case TaskStateEnum.InProgress:
-                        if (this.SubTasks.Any())
-                        {
-                            if (this.SubTasks.All(sb => sb.ChildTask.TaskState == TaskStateEnum.Completed))
-                                throw new BusinessLogicException(
-                                    $"It's not possible to change a Task's State to {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.InProgress)} when all of it's SubTasks are {EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Completed)}");
-                            else if (!this.SubTasks.Any(sb => sb.ChildTask.TaskState == TaskStateEnum.InProgress))
-                            {
-                                string inProgressDescription = EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.InProgress);
-
-                                throw new BusinessLogicException(
-                                    $"It's not possible to change a Task's State to {inProgressDescription} if it doesn't have at least one SubTask as {inProgressDescription}");
-                            }
-                        }
-
                         this.StartDate = DateTime.Now;
                         this.FinishDate = null;
 
                         break;
 
+                    //A Completed Task has started and finished
                     case TaskStateEnum.Completed:
-                        if (this.SubTasks.Any() &&
-                           this.SubTasks.Any(sb => sb.ChildTask.TaskState != TaskStateEnum.Completed))
-                        {
-                            string completedDescription = EnumHelper.GetDescription<TaskStateEnum>(TaskStateEnum.Completed);
-
-                            throw new BusinessLogicException(
-                                $"It's not possible to change a Task's State to {completedDescription} unless all SubTasks are also {completedDescription}");
-                        }
-
                         this.FinishDate = DateTime.Now;
 
                         break;
 
+                    //In case that the destiny State is not valid
                     default:
                         this.ThrowExceptionDestinyStateNotFound(destinyState);
                         break;
@@ -252,16 +225,8 @@ namespace Tms.Domain
 
             subTask.ChildTask.ChangeTaskState(destinyState);
 
-
             //When changing one SubTask's State the Parent Task should be aware of it's own State
-
-            //Checking "Any" before of "All" maximixe the changes of not having to go through the whole collection
-            if (this.SubTasks.Any(st => st.ChildTask.TaskState == TaskStateEnum.InProgress))
-                this.ChangeTaskState(TaskStateEnum.InProgress);
-            else if (this.SubTasks.All(st => st.ChildTask.TaskState == TaskStateEnum.Completed))
-                this.ChangeTaskState(TaskStateEnum.Completed);
-            else
-                this.ChangeTaskState(TaskStateEnum.Planned);
+            this.ChangeTaskState(GetWhichStateTheParentTaskShouldBe());
         }
 
         public void AddParentTaskId(Task task) =>
@@ -274,6 +239,23 @@ namespace Tms.Domain
         {
             this.Name = creatingTaskDto.Name;
             this.Description = creatingTaskDto.Description;
+        }
+
+        private TaskStateEnum GetWhichStateTheParentTaskShouldBe()
+        {
+            //Checking "Any" before of "All" maximixe the changes of not having to go through the whole collection
+
+            //The Parent Task is InProgress if it has ANY Children Task in InProgress
+            if (this.SubTasks.Any(st => st.ChildTask.TaskState == TaskStateEnum.InProgress))
+                return TaskStateEnum.InProgress;
+
+            //The Parent Task is Completed if it has ALL Children Task Completed
+            else if (this.SubTasks.All(st => st.ChildTask.TaskState == TaskStateEnum.Completed))
+                return TaskStateEnum.Completed;
+
+            //The Parent Task is Planned in all the other cases
+            else
+                return TaskStateEnum.Planned;
         }
 
         private void ThrowExceptionDestinyStateNotFound(TaskStateEnum destinyState) =>

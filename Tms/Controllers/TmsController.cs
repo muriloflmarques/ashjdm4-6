@@ -96,6 +96,7 @@ namespace Tms.Controllers
             else
                 _taskService.CreateNewTask(creatingTaskDto);
 
+            //Commit the changes done by the Service
             _uow.Commit();
 
             return Ok();
@@ -107,8 +108,9 @@ namespace Tms.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] CreatingTaskDto creatingTaskDto)
         {
-            _taskService.UpdateNewTask(id, creatingTaskDto);
+            _taskService.UpdateTask(id, creatingTaskDto);
 
+            //Commit the changes done by the Service
             _uow.Commit();
 
             return Ok();
@@ -126,6 +128,7 @@ namespace Tms.Controllers
 
             _taskService.ChangeTaskState(id, (TaskStateEnum)taskState);
 
+            //Commit the changes done by the Service
             _uow.Commit();
 
             return Ok();
@@ -140,6 +143,7 @@ namespace Tms.Controllers
         {
             _taskService.DeleteTask(id);
 
+            //Commit the changes done by the Service
             _uow.Commit();
 
             return Ok();

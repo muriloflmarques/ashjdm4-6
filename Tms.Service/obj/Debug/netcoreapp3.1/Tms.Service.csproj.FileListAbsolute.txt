@@ -14,8 +14,3 @@ Z:\Projects\ashjdm4-6\Tms.Service\obj\Debug\netcoreapp3.1\Tms.Service.csproj.Cor
 Z:\Projects\ashjdm4-6\Tms.Service\obj\Debug\netcoreapp3.1\Tms.Service.csproj.CopyComplete
 Z:\Projects\ashjdm4-6\Tms.Service\obj\Debug\netcoreapp3.1\Tms.Service.dll
 Z:\Projects\ashjdm4-6\Tms.Service\obj\Debug\netcoreapp3.1\Tms.Service.pdb
-Z:\Projects\ashjdm4-6\Tms.Service\bin\Debug\netcoreapp3.1\Tms.Service.xml
-Z:\Projects\ashjdm4-6\Tms.Service\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.xml
-Z:\Projects\ashjdm4-6\Tms.Service\bin\Debug\netcoreapp3.1\Tms.Infra.Data.xml
-Z:\Projects\ashjdm4-6\Tms.Service\bin\Debug\netcoreapp3.1\Tms.Domain.xml
-Z:\Projects\ashjdm4-6\Tms.Service\obj\Debug\netcoreapp3.1\Tms.Service.xml

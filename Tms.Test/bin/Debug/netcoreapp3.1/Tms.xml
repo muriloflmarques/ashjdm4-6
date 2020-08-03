@@ -6,9 +6,38 @@
     <members>
         <member name="M:Tms.Controllers.TmsController.GetTasksWithoutSubtasks">
             <summary>
-            Method!!!!!!!!!
+            Shows Tasks without Join with SubTasks
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:Tms.Controllers.TmsController.GetTasksWithSubtasks">
+            <summary>
+            Shows Tasks with Join with SubTasks excluding from the root the SubTasks
+            </summary>
+        </member>
+        <member name="M:Tms.Controllers.TmsController.Get(System.Int32)">
+            <summary>
+            Get especific Task
+            </summary>
+        </member>
+        <member name="M:Tms.Controllers.TmsController.Post(Tms.Infra.CrossCutting.DTOs.CreatingTaskDto)">
+            <summary>
+            Creates new Task
+            </summary>
+        </member>
+        <member name="M:Tms.Controllers.TmsController.Put(System.Int32,Tms.Infra.CrossCutting.DTOs.CreatingTaskDto)">
+            <summary>
+            Update a Task
+            </summary>
+        </member>
+        <member name="M:Tms.Controllers.TmsController.Put(System.Int32,System.Int32)">
+            <summary>
+            Update a Task's State
+            </summary>
+        </member>
+        <member name="M:Tms.Controllers.TmsController.Delete(System.Int32)">
+            <summary>
+            Remove a Task
+            </summary>
         </member>
     </members>
 </doc>

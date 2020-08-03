@@ -6,6 +6,13 @@ using Tms.Infra.Data.Interface;
 
 namespace Tms.Infra.Data
 {
+    /// <summary>
+    /// As the Task entity is self-referenced through the SubTask entity it's
+    /// not possible to have it delete on the common way without triggering a
+    /// possible redundant delete using cascade, because of that I have 
+    /// implemented this class to append delete command to the DbContext 
+    /// transaction so it would only be performed when the commit occours
+    /// </summary>
     public class RawSQlCommand
     {
         public RawSQlCommand(string rawSqlString, object[] paramsForSql = null)
@@ -18,6 +25,9 @@ namespace Tms.Infra.Data
         public object[] ParamsForSql { get; protected set; }
     }
 
+    /// <summary>
+    /// Self implemented Unit Of Work to fully commit all changes
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         private readonly TmsDbContext _tmsDbContext;
@@ -44,12 +54,13 @@ namespace Tms.Infra.Data
 
                 foreach (var rawCommand in RawSQlCommandList)
                 {
+                    //execute SQL Command WITH params
                     if (rawCommand.ParamsForSql != null)                    
                         _tmsDbContext.Database.ExecuteSqlRaw(rawCommand.RawSqlString, rawCommand.ParamsForSql);
                     
+                    //execute SQL Command WITHOUT params
                     else                   
-                        _tmsDbContext.Database.ExecuteSqlRaw(rawCommand.RawSqlString);
-                    
+                    _tmsDbContext.Database.ExecuteSqlRaw(rawCommand.RawSqlString);                    
                 }
 
                 _tmsDbContext.SaveChanges();
@@ -61,6 +72,7 @@ namespace Tms.Infra.Data
             }
             finally
             {
+                //Cleand the current commands so they won't be executed more than once
                 this.RawSQlCommandList = new List<RawSQlCommand>();
                 _transaction.Dispose();
             }

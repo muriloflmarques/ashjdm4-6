@@ -7,7 +7,7 @@ namespace Tms.Service.Interfaces
     public interface ITaskService
     {
         void ChangeTaskState(int id, TaskStateEnum destinyState);
-        void UpdateNewTask(int id, CreatingTaskDto creatingTaskDto);
+        void UpdateTask(int id, CreatingTaskDto creatingTaskDto);
         void CreateNewTask(CreatingTaskDto creatingTaskDto);
         void CreateNewSubTask(CreatingTaskDto creatingTaskDto);
         void DeleteTask(int id);
