@@ -30,6 +30,7 @@ namespace Tms.Domain
         private DateTime? _startDate;
         private DateTime? _finishDate;
         private ICollection<SubTask> _subTasks;
+        private TaskStateEnum _taskState;
 
         public int? ParentTaskId { get; private set; }
 
@@ -80,16 +81,51 @@ namespace Tms.Domain
             get { return _finishDate; }
             private set
             {
-                if (!this.StartDate.HasValue)
-                    throw new DomainRulesException("You must informe a start date before setting a finish date");
-                else if (value.HasValue && this.StartDate > value.Value)
-                    throw new DomainRulesException("Finish date can not be smaller than start date");
+                if (value != null)
+                {
+                    if (!this.StartDate.HasValue)
+                        throw new DomainRulesException("You must informe a start date before setting a finish date");
+                    else if (this.StartDate > value)
+                        throw new DomainRulesException("Finish date can not be smaller than start date");
+                }
 
                 _finishDate = value;
             }
         }
 
-        public TaskStateEnum TaskState { get; private set; }
+        public TaskStateEnum TaskState
+        {
+            get { return _taskState; }
+            private set
+            {
+                switch (value)
+                {
+                    //A Planned Task hasn't started nor finished
+                    case TaskStateEnum.Planned:
+                        this.StartDate =
+                            this.FinishDate = null;
+                        break;
+
+                    //A Task in InProgress hasn't finished but has started
+                    case TaskStateEnum.InProgress:
+                        this.StartDate = DateTime.Now;
+                        this.FinishDate = null;
+                        break;
+
+                    //A Completed Task has started and finished
+                    case TaskStateEnum.Completed:
+                        this.FinishDate = DateTime.Now;
+                        break;
+
+                    //In case that the destiny State is not valid
+                    default:
+                        this.ThrowExceptionDestinyStateNotFound(value);
+                        break;
+                }
+
+                _taskState = value;
+            }
+        }
 
         public virtual ICollection<SubTask> SubTasks
         {
@@ -169,7 +205,7 @@ namespace Tms.Domain
             subTask.ChildTask.RemoveParentTaskId();
 
             //When changing one SubTask's State the Parent Task should be aware of it's own State
-            this.ChangeTaskState(GetWhichStateTheParentTaskShouldBe());
+            this.TaskState = GetWhichStateTheParentTaskShouldBe();
 
             return subTask;
         }
@@ -181,37 +217,7 @@ namespace Tms.Domain
                 throw new DomainRulesException("A parent Task's state can only be changed by changing it's children's Tasks state");
 
             if (this.TaskState != destinyState)
-            {
-                switch (destinyState)
-                {
-                    //A Planned Task hasn't started nor finished
-                    case TaskStateEnum.Planned:
-                        this.StartDate =
-                            this.FinishDate = null;
-
-                        break;
-
-                    //A Task in InProgress hasn't finished but has started
-                    case TaskStateEnum.InProgress:
-                        this.StartDate = DateTime.Now;
-                        this.FinishDate = null;
-
-                        break;
-
-                    //A Completed Task has started and finished
-                    case TaskStateEnum.Completed:
-                        this.FinishDate = DateTime.Now;
-
-                        break;
-
-                    //In case that the destiny State is not valid
-                    default:
-                        this.ThrowExceptionDestinyStateNotFound(destinyState);
-                        break;
-                }
-
                 this.TaskState = destinyState;
-            }
         }
 
         public void ChangeSubTaskState(Task taskToChange, TaskStateEnum destinyState)
@@ -226,11 +232,16 @@ namespace Tms.Domain
             subTask.ChildTask.ChangeTaskState(destinyState);
 
             //When changing one SubTask's State the Parent Task should be aware of it's own State
-            this.ChangeTaskState(GetWhichStateTheParentTaskShouldBe());
+            this.TaskState = GetWhichStateTheParentTaskShouldBe();
         }
 
-        public void AddParentTaskId(Task task) =>
+        public void AddParentTaskId(Task task)
+        {
+            if (this.Id == task?.Id)
+                throw new DomainRulesException("A Task can not be it's own Parent");
+
             this.ParentTaskId = task?.Id;
+        }
 
         public void RemoveParentTaskId() =>
             this.ParentTaskId = null;

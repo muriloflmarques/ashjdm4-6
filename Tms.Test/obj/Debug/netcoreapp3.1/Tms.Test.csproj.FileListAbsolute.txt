@@ -137,9 +137,11 @@ Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Tms.pdb
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.csprojAssemblyReference.cache
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.AssemblyInfoInputs.cache
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.AssemblyInfo.cs
-Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.csproj.CoreCompileInputs.cache
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.csproj.CopyComplete
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.dll
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.pdb
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.genruntimeconfig.cache
 Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Tms.xml
+Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.csproj.CoreCompileInputs.cache
+Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Castle.Core.dll
+Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Moq.dll

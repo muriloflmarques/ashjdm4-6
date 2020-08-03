@@ -33,14 +33,6 @@ namespace Tms.Service
             task.MapToDto();
 
         /// <summary>
-        /// Most of the time the queries over Task entity will have the same Includes (for Join)
-        /// and will be setted as AsNoTracking so this method prevents many equal lines to come
-        /// </summary>
-        /// <returns>IQueryable with proper dbSet AsNoTracking</returns>
-        private IQueryable<Domain.Task> GetDbSetAsNoTrackingWithDefaultIncludes() =>
-            _taskRepository.AddDefaultIncludeIntoDbSet(_taskRepository.GetDbSetAsNoTracking());
-
-        /// <summary>
         /// This method registers in the current SQL Transaction a command to perform the
         /// Delete of a SubTask entity
         /// </summary>
@@ -67,8 +59,7 @@ namespace Tms.Service
         public void UpdateTask(int id, CreatingTaskDto creatingTaskDto)
         {
             //Find the Task that will be updated or Throw Exception
-            var updatedTask = _taskRepository.SelectById(
-                 this.GetDbSetAsNoTrackingWithDefaultIncludes(), id)
+            var updatedTask = _taskRepository.SelectById(id)
                  ??
                  throw new BusinessLogicException("Error while updating Task, informed Id didn't return any result");
 
@@ -82,8 +73,7 @@ namespace Tms.Service
                 if (updatedTask.ParentTaskId.HasValue)
                 {
                     //Find the Parent Task of the updated Task or Throw Exception
-                    var currentParentTask = _taskRepository.SelectById(
-                         this.GetDbSetAsNoTrackingWithDefaultIncludes(), updatedTask.ParentTaskId.Value)
+                    var currentParentTask = _taskRepository.SelectById(updatedTask.ParentTaskId.Value)
                         ??
                         throw new BusinessLogicException("Error while updating Task, the curent parent of the updated Task could not be found");
 
@@ -97,8 +87,7 @@ namespace Tms.Service
                 }
 
                 //Find the NEW Parent Task of the updated Task or Throw Exception
-                var newParentTask = _taskRepository.SelectById(
-                    this.GetDbSetAsNoTrackingWithDefaultIncludes(), creatingTaskDto.ParentTaskId)
+                var newParentTask = _taskRepository.SelectById(creatingTaskDto.ParentTaskId)
                    ??
                    throw new BusinessLogicException("Error while updating Task, could not find the new parent Task");
 
@@ -116,19 +105,16 @@ namespace Tms.Service
         public void ChangeTaskState(int id, TaskStateEnum destinyState)
         {
             //Find the Task that will be updated or Throw Exception
-            var taskToUpdate = _taskRepository.SelectById(
-                 this.GetDbSetAsNoTrackingWithDefaultIncludes(), id)
+            var taskToUpdate = _taskRepository.SelectById(id)
                  ??
                  throw new BusinessLogicException("Error while changing Task's state, informed Id didn't return any result");
 
             //If the Task has a Parent
             if (taskToUpdate.ParentTaskId.HasValue)
             {
-                var dbSet = this.GetDbSetAsNoTrackingWithDefaultIncludes();
-
                 //Then find it's Parent or Throw Exception
                 var parentTask =
-                    _taskRepository.SelectById(dbSet, taskToUpdate.ParentTaskId.Value)
+                    _taskRepository.SelectById(taskToUpdate.ParentTaskId.Value)
                     ??
                     throw new BusinessLogicException("Error while changing Task's state, parent Task not found");
 
@@ -166,9 +152,7 @@ namespace Tms.Service
         public void CreateNewSubTask(CreatingTaskDto creatingTaskDto)
         {
             //Select the informed Parent Task or Throw Exception
-            var parentTask = _taskRepository.SelectById(
-                this.GetDbSetAsNoTrackingWithDefaultIncludes(),
-                creatingTaskDto.ParentTaskId)
+            var parentTask = _taskRepository.SelectById(creatingTaskDto.ParentTaskId)
                 ??
                 throw new BusinessLogicException("To create a new SubTask a existing Task is needed");
 
@@ -200,8 +184,7 @@ namespace Tms.Service
         public void DeleteTask(int id)
         {
             //Find the Task to Delete or Throw Exception
-            var task = _taskRepository.SelectById(
-                this.GetDbSetAsNoTrackingWithDefaultIncludes(), id)
+            var task = _taskRepository.SelectById(id)
                 ??
                 throw new BusinessLogicException("Error while deleting Task, informed Id didn't return any result");
 
@@ -240,8 +223,10 @@ namespace Tms.Service
         /// </summary>
         public IEnumerable<Domain.Task> SelectTasksWithSubtasks()
         {
-            return _taskRepository.SelectTop(
-                this.GetDbSetAsNoTrackingWithDefaultIncludes(),
+            var dbSet = _taskRepository
+                .AddDefaultIncludeIntoDbSet(_taskRepository.GetDbSetAsNoTracking());
+
+            return _taskRepository.SelectTop(dbSet,
                 task => !task.ParentTaskId.HasValue);
         }
     }

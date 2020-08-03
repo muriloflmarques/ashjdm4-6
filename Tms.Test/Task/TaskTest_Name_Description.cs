@@ -34,11 +34,18 @@ namespace Tms.Test.Task
         private SubTask GetFunctionalSubTask()
         {
             var parentTask = this.GetFunctionalTask();
-            var childTask = this.GetFunctionalTask();
+            new PrivateObject(parentTask).SetPrivateProperty("Id", 1);
 
-            return new SubTask(
+            var childTask = this.GetFunctionalTask();
+            new PrivateObject(childTask).SetPrivateProperty("Id", 2);
+
+            var subTask = new SubTask(
                     parentTask: parentTask,
                     childTask: childTask);
+
+            parentTask.AddSubTask(subTask);
+
+            return subTask;
         }
 
         private void AddFunctionalSubTask_IntoParentTask(Domain.Task parentTask)
