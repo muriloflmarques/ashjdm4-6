@@ -11,17 +11,10 @@ namespace Tms.Test.Task
 
         public Domain.Task GetFunctionalTask_With_Two_SubTasks_All_As_Planned()
         {
-            var parentTask = this.GetFunctionalTask();
-            new PrivateObject(parentTask).SetPrivateProperty("Id", 1);
+            //Returns a Parent Task with Id = 1 and a Child (inside the Parent) with Id = 2
+            var subTask = this.GetFunctionalSubTask();
             
-            var childTask_1 = this.GetFunctionalTask();
-            new PrivateObject(childTask_1).SetPrivateProperty("Id", 2);
-
-            var subTask_1 = new SubTask(
-                    parentTask: parentTask,
-                    childTask: childTask_1);
-
-            parentTask.AddSubTask(subTask_1);
+            var parentTask = subTask.ParentTask;
 
             var childTask_2 = this.GetFunctionalTask();
             new PrivateObject(childTask_2).SetPrivateProperty("Id", 3);

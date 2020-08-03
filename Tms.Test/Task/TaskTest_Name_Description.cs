@@ -11,6 +11,9 @@ namespace Tms.Test.Task
     {
         #region Private Fields
 
+        private readonly string validTaskName = "A Perfect Name";
+        private readonly string validTaskDescription = "A Perfect Description";
+
         private readonly int maxLengthTaskName = 40;
         private readonly int minLengthTaskName = 3;
 
@@ -25,18 +28,22 @@ namespace Tms.Test.Task
 
         private Domain.Task GetFunctionalTask()
         {
-            const string taskName = "A Perfect Name";
-            const string taskDescription = "A Perfect Description";
+            
 
-            return new Domain.Task(taskName, taskDescription);
+            var task = new Domain.Task(validTaskName, validTaskDescription);
+            new PrivateObject(task).SetPrivateProperty("Id", 1);
+
+            return task;
         }
 
         private SubTask GetFunctionalSubTask()
         {
+            //Get a Parent with Id = 1
             var parentTask = this.GetFunctionalTask();
-            new PrivateObject(parentTask).SetPrivateProperty("Id", 1);
 
+            //Get a Child with Id = 1
             var childTask = this.GetFunctionalTask();
+            //then override it's Id to 2
             new PrivateObject(childTask).SetPrivateProperty("Id", 2);
 
             var subTask = new SubTask(
