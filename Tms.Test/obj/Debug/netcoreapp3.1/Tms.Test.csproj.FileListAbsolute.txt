@@ -142,3 +142,8 @@ Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.csproj.CopyCompl
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.dll
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.pdb
 Z:\Projects\ashjdm4-6\Tms.Test\obj\Debug\netcoreapp3.1\Tms.Test.genruntimeconfig.cache
+Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Tms.Domain.xml
+Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.xml
+Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Tms.Infra.Data.xml
+Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Tms.Service.xml
+Z:\Projects\ashjdm4-6\Tms.Test\bin\Debug\netcoreapp3.1\Tms.xml

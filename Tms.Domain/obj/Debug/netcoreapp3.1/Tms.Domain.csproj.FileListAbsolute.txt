@@ -10,3 +10,6 @@ Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.csproj.CoreC
 Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.csproj.CopyComplete
 Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.dll
 Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.pdb
+Z:\Projects\ashjdm4-6\Tms.Domain\bin\Debug\netcoreapp3.1\Tms.Domain.xml
+Z:\Projects\ashjdm4-6\Tms.Domain\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.xml
+Z:\Projects\ashjdm4-6\Tms.Domain\obj\Debug\netcoreapp3.1\Tms.Domain.xml

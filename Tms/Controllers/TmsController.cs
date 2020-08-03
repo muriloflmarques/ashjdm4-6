@@ -29,6 +29,10 @@ namespace Tms.Controllers
             this._uow = uow;
         }
 
+        /// <summary>
+        /// Shows Tasks without Join with SubTasks
+        /// </summary>
+        // GET api/<tmscontroller>/GetTasksWithoutSubtasks
         [HttpGet("GetTasksWithoutSubtasks")]
         public ActionResult<IEnumerable<TaskDto>> GetTasksWithoutSubtasks()
         {
@@ -44,6 +48,10 @@ namespace Tms.Controllers
             return Ok(dtos);
         }
 
+        /// <summary>
+        /// Shows Tasks with Join with SubTasks excluding from the root the SubTasks
+        /// </summary>
+        // GET api/<tmscontroller>/TasksWithSubtasks
         [HttpGet("TasksWithSubtasks")]
         public ActionResult<IEnumerable<TaskDto>> GetTasksWithSubtasks()
         {
@@ -59,6 +67,10 @@ namespace Tms.Controllers
             return Ok(dtos);
         }
 
+        /// <summary>
+        /// Get especific Task
+        /// </summary>
+        // GET api/<tmscontroller>/1
         [HttpGet("{id}")]
         public ActionResult<TaskDto> Get(int id)
         {
@@ -72,6 +84,9 @@ namespace Tms.Controllers
             return Ok(dto);
         }
 
+        /// <summary>
+        /// Creates new Task
+        /// </summary>
         // POST api/<TmsController>/NewTask
         [HttpPost("NewTask")]
         public IActionResult Post(CreatingTaskDto creatingTaskDto)
@@ -86,27 +101,9 @@ namespace Tms.Controllers
             return Ok();
         }
 
-        //// GET: api/<TmsController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET api/<TmsController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<TmsController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        // PUT api/<TmsController>/5
+        /// <summary>
+        /// Update a Task
+        /// </summary>
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] CreatingTaskDto creatingTaskDto)
         {
@@ -117,7 +114,10 @@ namespace Tms.Controllers
             return Ok();
         }
 
-        // PUT api/<TmsController>/5
+        /// <summary>
+        /// Update a Task's State
+        /// </summary>
+        // PUT api/<TmsController>/1
         [HttpPut("{id}/{taskState}")]
         public ActionResult Put(int id, int taskState)
         {
@@ -131,7 +131,10 @@ namespace Tms.Controllers
             return Ok();
         }
 
-        // delete api/<tmscontroller>/5
+        /// <summary>
+        /// Remove a Task
+        /// </summary>
+        // DELETE api/<tmscontroller>/1
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

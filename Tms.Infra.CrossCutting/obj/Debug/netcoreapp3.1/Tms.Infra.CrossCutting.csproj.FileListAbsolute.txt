@@ -7,3 +7,5 @@ Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.C
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.dll
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.pdb
 Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.csprojAssemblyReference.cache
+Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\bin\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.xml
+Z:\Projects\ashjdm4-6\Tms.Infra.CrossCutting\obj\Debug\netcoreapp3.1\Tms.Infra.CrossCutting.xml
